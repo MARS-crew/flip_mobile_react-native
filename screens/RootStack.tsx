@@ -20,8 +20,8 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 function RootStack() {
   return (
     <Stack.Navigator screenOptions={{headerShown: false}}>
-      <Stack.Screen name="MainTab" component={MainTab} />
       <Stack.Screen name="SignIn" component={SignInScreen} />
+      <Stack.Screen name="MainTab" component={MainTab} />
       <Stack.Screen name="SignUp" component={SignInScreen} />
     </Stack.Navigator>
   );
