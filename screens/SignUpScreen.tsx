@@ -32,11 +32,13 @@ function SignUpScreen() {
         <LabelWithInput
           label="비밀번호"
           placeholder="비밀번호를 입력해주세요"
+          secureTextEntry
         />
         <LabelWithInput
           label="비밀번호 확인"
           placeholder="비밀번호를 입력해주세요"
           hasMarginBottom
+          secureTextEntry
         />
         <Button text="회원가입" onPress={() => {}} />
         <View style={styles.seperator} />

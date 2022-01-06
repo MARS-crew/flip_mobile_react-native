@@ -4,12 +4,14 @@ import colorPalette from '../../theme/colorPalette';
 
 export interface InputProps {
   placeholder: string;
+  secureTextEntry?: boolean;
 }
 
-function Input({ placeholder }: InputProps) {
+function Input({ placeholder, secureTextEntry }: InputProps) {
   const [isFocus, setIsFocus] = useState(false);
   return (
     <TextInput
+      secureTextEntry={secureTextEntry}
       onFocus={() => setIsFocus(true)}
       onBlur={() => setIsFocus(false)}
       placeholder={placeholder}

@@ -6,17 +6,19 @@ import Input, { InputProps } from './Input';
 interface LabelWithInputProps extends InputProps {
   label: string;
   hasMarginBottom?: boolean;
+  secureTextEntry?: boolean;
 }
 
 function LabelWithInput({
   label,
   placeholder,
   hasMarginBottom,
+  secureTextEntry,
 }: LabelWithInputProps) {
   return (
     <View style={[styles.block, hasMarginBottom && styles.hasMarginBottom]}>
       <Text style={styles.label}>{label}</Text>
-      <Input placeholder={placeholder} />
+      <Input placeholder={placeholder} secureTextEntry={secureTextEntry} />
     </View>
   );
 }
