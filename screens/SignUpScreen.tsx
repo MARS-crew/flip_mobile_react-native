@@ -1,3 +1,4 @@
+import { useNavigation } from '@react-navigation/native';
 import React from 'react';
 import {
   Image,
@@ -9,11 +10,12 @@ import {
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Button from '../components/common/Button';
-import Input from '../components/common/Input';
 import LabelWithInput from '../components/common/LabelWithInput';
 import colorPalette from '../theme/colorPalette';
+import { RootStackNavigationProp } from './RootStack';
 
 function SignUpScreen() {
+  const navigation = useNavigation<RootStackNavigationProp>();
   return (
     <SafeAreaView style={styles.block}>
       <KeyboardAvoidingView
@@ -40,7 +42,11 @@ function SignUpScreen() {
         <View style={styles.seperator} />
         <Text style={styles.authText}>
           계정이 있으신가요?{' '}
-          <Text style={styles.strongText}>로그인 하러가기</Text>
+          <Text
+            style={styles.strongText}
+            onPress={() => navigation.navigate('SignIn')}>
+            로그인 하러가기
+          </Text>
         </Text>
       </KeyboardAvoidingView>
     </SafeAreaView>
