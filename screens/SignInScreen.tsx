@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
   },
   title: {
     color: colorPalette.gray5,
-    fontSize: 32,
+    fontSize: 24,
     fontWeight: 'bold',
   },
   logoBlock: {
