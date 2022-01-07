@@ -5,10 +5,12 @@ import {
 } from '@react-navigation/bottom-tabs';
 import HomeScreen from './HomeScreen';
 import MyScreen from './MyScreen';
+import SettingsScreen from './SettingsScreen';
 
 type MainTabParamList = {
   Home: undefined;
-  My: undefined;
+  MyWorkbook: undefined;
+  Settings: undefined;
 };
 
 export type MainTabNavigationProp = BottomTabNavigationProp<MainTabParamList>;
@@ -18,11 +20,20 @@ const Tab = createBottomTabNavigator<MainTabParamList>();
 function MainTab() {
   return (
     <Tab.Navigator>
-      <Tab.Screen name="Home" component={HomeScreen} options={{title: '홈'}} />
       <Tab.Screen
-        name="My"
+        name="Home"
+        component={HomeScreen}
+        options={{ title: '홈' }}
+      />
+      <Tab.Screen
+        name="MyWorkbook"
         component={MyScreen}
-        options={{title: '마이페이지'}}
+        options={{ title: '내 문제집' }}
+      />
+      <Tab.Screen
+        name="Settings"
+        component={SettingsScreen}
+        options={{ title: '설정' }}
       />
     </Tab.Navigator>
   );
