@@ -26,12 +26,14 @@ function MainTab() {
         tabBarActiveTintColor: colorPalette.primary,
         tabBarInactiveTintColor: colorPalette.gray5,
         tabBarShowLabel: false,
+        headerTitleAlign: 'center',
       }}>
       <Tab.Screen
         name="Home"
         component={HomeScreen}
         options={{
-          title: '홈',
+          title: 'FLIP',
+          headerTintColor: colorPalette.primary,
           tabBarIcon: ({ color, size }) => (
             <Icon name="home" color={color} size={size} />
           ),
