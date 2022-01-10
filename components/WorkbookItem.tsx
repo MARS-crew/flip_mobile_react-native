@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import {
+  Dimensions,
   Pressable,
   StyleSheet,
   Text,
@@ -9,9 +10,13 @@ import {
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import colorPalette from '../theme/colorPalette';
 
-function WorkbookItem() {
+interface IWorkbookItem {
+  itemWidth?: number;
+  gap?: number;
+}
+
+function WorkbookItem({ itemWidth, gap }: IWorkbookItem) {
   const [editable, setEditable] = useState(true);
-  const [toggle, setToggle] = useState(true);
 
   const onEditPress = () => {
     console.log('수정');
@@ -21,25 +26,24 @@ function WorkbookItem() {
   };
 
   return (
-    <View style={styles.block}>
+    <View
+      style={[
+        styles.block,
+        { width: itemWidth ?? 'auto', marginHorizontal: gap ?? 0 },
+      ]}>
       <Pressable>
         <View style={styles.headerBlock}>
           <Text style={styles.titleText}>문제집 이름</Text>
-          {editable && (
-            <Pressable style={styles.icon} onPress={() => setToggle(!toggle)}>
-              <Icon name="more-vert" color={colorPalette.gray6} size={24} />
-            </Pressable>
-          )}
-          {editable && toggle && (
-            <View style={styles.more}>
-              <Pressable style={{ padding: 8 }}>
-                <Text onPress={onEditPress}>수정</Text>
+          {/* {editable && (
+            <View style={{ flexDirection: 'row' }}>
+              <Pressable style={styles.icon} onPress={onEditPress}>
+                <Icon name="edit" color={colorPalette.gray6} size={20} />
               </Pressable>
-              <Pressable style={{ padding: 8 }}>
-                <Text onPress={onRemovePress}>삭제</Text>
+              <Pressable style={styles.icon} onPress={onRemovePress}>
+                <Icon name="remove" color={colorPalette.gray6} size={24} />
               </Pressable>
             </View>
-          )}
+          )} */}
         </View>
         <View style={styles.bodyBlock}>
           <View style={styles.defaultThumbnail}>
@@ -61,14 +65,9 @@ const styles = StyleSheet.create({
     paddingRight: 8,
     backgroundColor: colorPalette.gray0,
     borderRadius: 8,
-    shadowColor: colorPalette.gray6,
-    shadowOpacity: 0.2,
-    shadowRadius: 2,
-    shadowOffset: {
-      height: 0,
-      width: 0,
-    },
-    elevation: 3,
+    borderWidth: 1,
+    borderColor: colorPalette.gray3,
+    zIndex: 999,
   },
   headerBlock: {
     flexDirection: 'row',
