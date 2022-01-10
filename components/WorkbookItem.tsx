@@ -1,13 +1,5 @@
-import React, { useState } from 'react';
-import {
-  Dimensions,
-  Pressable,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import React from 'react';
+import { Pressable, StyleSheet, Text, View } from 'react-native';
 import colorPalette from '../theme/colorPalette';
 
 interface IWorkbookItem {
@@ -16,15 +8,6 @@ interface IWorkbookItem {
 }
 
 function WorkbookItem({ itemWidth, gap }: IWorkbookItem) {
-  const [editable, setEditable] = useState(true);
-
-  const onEditPress = () => {
-    console.log('수정');
-  };
-  const onRemovePress = () => {
-    console.log('삭제');
-  };
-
   return (
     <View
       style={[
@@ -34,16 +17,6 @@ function WorkbookItem({ itemWidth, gap }: IWorkbookItem) {
       <Pressable>
         <View style={styles.headerBlock}>
           <Text style={styles.titleText}>문제집 이름</Text>
-          {/* {editable && (
-            <View style={{ flexDirection: 'row' }}>
-              <Pressable style={styles.icon} onPress={onEditPress}>
-                <Icon name="edit" color={colorPalette.gray6} size={20} />
-              </Pressable>
-              <Pressable style={styles.icon} onPress={onRemovePress}>
-                <Icon name="remove" color={colorPalette.gray6} size={24} />
-              </Pressable>
-            </View>
-          )} */}
         </View>
         <View style={styles.bodyBlock}>
           <View style={styles.defaultThumbnail}>

@@ -10,7 +10,6 @@ import {
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Button from '../components/common/Button';
-import Input from '../components/common/Input';
 import LabelWithInput from '../components/common/LabelWithInput';
 import colorPalette from '../theme/colorPalette';
 import { RootStackNavigationProp } from './RootStack';

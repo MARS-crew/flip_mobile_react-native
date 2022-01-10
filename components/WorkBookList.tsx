@@ -1,10 +1,9 @@
 import { useNavigation } from '@react-navigation/native';
-import React, { useState } from 'react';
+import React from 'react';
 import { Dimensions, Pressable, StyleSheet, Text, View } from 'react-native';
 import Carousel from 'react-native-snap-carousel';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { MainTabNavigationProp } from '../screens/MainTab';
-import { RootStackNavigationProp } from '../screens/RootStack';
 import colorPalette from '../theme/colorPalette';
 import WorkbookItem from './WorkbookItem';
 
