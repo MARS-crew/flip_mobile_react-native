@@ -1,5 +1,8 @@
+import { useNavigation } from '@react-navigation/native';
 import React from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { MainTabNavigationProp } from '../screens/MainTab';
+import { RootStackNavigationProp } from '../screens/RootStack';
 import colorPalette from '../theme/colorPalette';
 
 interface IWorkbookItem {
@@ -8,13 +11,14 @@ interface IWorkbookItem {
 }
 
 function WorkbookItem({ itemWidth, gap }: IWorkbookItem) {
+  const navigation = useNavigation<RootStackNavigationProp>();
   return (
     <View
       style={[
         styles.block,
         { width: itemWidth ?? 'auto', marginHorizontal: gap ?? 0 },
       ]}>
-      <Pressable>
+      <Pressable onPress={() => navigation.navigate('Learn')}>
         <View style={styles.headerBlock}>
           <Text style={styles.titleText}>문제집 이름</Text>
         </View>

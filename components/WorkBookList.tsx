@@ -20,10 +20,10 @@ function WorkBookList({ title }: WorkBookListProps) {
     <View style={styles.block}>
       <View style={styles.listHeader}>
         <Text style={styles.titleText}>{title}</Text>
-        <Pressable style={styles.more}>
-          <Text
-            style={{ marginRight: 4, color: colorPalette.gray6 }}
-            onPress={() => navigation.navigate('MyWorkbook')}>
+        <Pressable
+          style={styles.more}
+          onPress={() => navigation.navigate('MyWorkbook')}>
+          <Text style={{ marginRight: 4, color: colorPalette.gray6 }}>
             전체 보기
           </Text>
           <Icon name="arrow-forward-ios" size={16} color={colorPalette.gray6} />

@@ -8,6 +8,7 @@ import MyScreen from './MyScreen';
 import SettingsScreen from './SettingsScreen';
 import colorPalette from '../theme/colorPalette';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import MyWorkbook from './MyWorkbook';
 
 type MainTabParamList = {
   Home: undefined;
@@ -41,7 +42,7 @@ function MainTab() {
       />
       <Tab.Screen
         name="MyWorkbook"
-        component={MyScreen}
+        component={MyWorkbook}
         options={{
           title: '내 문제집',
           tabBarIcon: ({ color, size }) => (
