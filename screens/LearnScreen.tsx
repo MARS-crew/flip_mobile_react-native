@@ -46,6 +46,7 @@ function LearnScreen() {
 const Block = styled.SafeAreaView`
   flex: 1;
   flex-direction: column;
+  background-color: ${colorPalette.gray0};
 `;
 
 const LearnHeader = styled.View`

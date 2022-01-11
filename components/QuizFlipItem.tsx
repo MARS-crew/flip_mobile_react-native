@@ -123,6 +123,8 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
     padding: 16,
+    borderWidth: 1,
+    borderColor: colorPalette.gray3,
   },
   flipCardBack: {
     position: 'absolute',

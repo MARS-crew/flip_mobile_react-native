@@ -31,6 +31,14 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     borderWidth: 1,
     borderColor: colorPalette.gray3,
+    // shadowColor: colorPalette.gray6,
+    // shadowOpacity: 0.1,
+    // shadowRadius: 2,
+    // shadowOffset: {
+    //   height: 3,
+    //   width: 3,
+    // },
+    // elevation: 5,
   },
   focus: {
     borderColor: colorPalette.primary,
