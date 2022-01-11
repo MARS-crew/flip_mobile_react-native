@@ -1,11 +1,13 @@
 import React from 'react';
-import { Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import WorkbookWriteEditor from '../components/WorkbookWriteEditor';
+import WorkbookWriteHeader from '../components/WorkbookWriteHeader';
 
 function WorkbookWriteScreen() {
   return (
-    <SafeAreaView>
-      <Text>workbook write screen</Text>
+    <SafeAreaView edges={['bottom']} style={{ flex: 1 }}>
+      <WorkbookWriteHeader />
+      <WorkbookWriteEditor />
     </SafeAreaView>
   );
 }

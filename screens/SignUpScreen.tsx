@@ -41,7 +41,7 @@ function SignUpScreen() {
           secureTextEntry
         />
         <Button text="회원가입" onPress={() => {}} />
-        <View style={styles.seperator} />
+        <View style={styles.separator} />
         <Text style={styles.authText}>
           계정이 있으신가요?{' '}
           <Text
@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
     padding: 16,
     flex: 1,
   },
-  seperator: {
+  separator: {
     height: 1,
     backgroundColor: colorPalette.gray4,
     marginVertical: 16,

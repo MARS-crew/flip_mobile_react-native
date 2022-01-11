@@ -50,7 +50,11 @@ function RootStack() {
         component={SignUpScreen}
         options={{ headerShown: false }}
       />
-      <Stack.Screen name="WorkbookWrite" component={WorkbookWriteScreen} />
+      <Stack.Screen
+        name="WorkbookWrite"
+        component={WorkbookWriteScreen}
+        options={{ headerShown: false }}
+      />
     </Stack.Navigator>
   );
 }

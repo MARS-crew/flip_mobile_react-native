@@ -29,16 +29,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     paddingVertical: 8,
     borderRadius: 8,
-    borderWidth: 2,
-    borderColor: colorPalette.gray0,
-    shadowColor: colorPalette.gray6,
-    shadowOpacity: 0.1,
-    shadowRadius: 2,
-    shadowOffset: {
-      height: 3,
-      width: 3,
-    },
-    elevation: 5,
+    borderWidth: 1,
+    borderColor: colorPalette.gray3,
   },
   focus: {
     borderColor: colorPalette.primary,

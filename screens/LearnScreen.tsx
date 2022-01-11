@@ -4,7 +4,7 @@ import { Dimensions, Text, View } from 'react-native';
 import Carousel from 'react-native-snap-carousel';
 import styled from 'styled-components/native';
 import Button from '../components/common/Button';
-import QuizItem from '../components/QuizItem';
+import QuizFlipItem from '../components/QuizFlipItem';
 import colorPalette from '../theme/colorPalette';
 import { RootStackNavigationProp } from './RootStack';
 
@@ -28,7 +28,7 @@ function LearnScreen() {
       <Carousel
         activeSlideAlignment="center"
         data={[1, 2, 3]}
-        renderItem={() => <QuizItem />}
+        renderItem={() => <QuizFlipItem />}
         sliderWidth={screenWidth}
         itemWidth={screenWidth - 80}
         inactiveSlideOpacity={1}
