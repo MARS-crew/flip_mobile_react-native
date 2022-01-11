@@ -43,14 +43,14 @@ const styels = StyleSheet.create({
     backgroundColor: 'tomato',
   },
   headerBlock: {
-    height: 46,
+    height: 44.5,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
     paddingHorizontal: 16,
     backgroundColor: colorPalette.gray0,
     borderBottomColor: colorPalette.gray3,
-    borderBottomWidth: 1,
+    borderBottomWidth: 0.5,
   },
   title: {
     position: 'absolute',
