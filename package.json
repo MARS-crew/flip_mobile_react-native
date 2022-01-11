@@ -19,6 +19,7 @@
     "react-native": "0.66.4",
     "react-native-card-flip": "^1.0.7",
     "react-native-flip": "^0.2.2",
+    "react-native-gesture-handler": "^2.1.1",
     "react-native-safe-area-context": "^3.3.2",
     "react-native-screens": "^3.10.1",
     "react-native-snap-carousel": "^3.9.1",
