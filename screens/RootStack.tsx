@@ -27,6 +27,11 @@ function RootStack() {
   return (
     <Stack.Navigator>
       <Stack.Screen
+        name="MainTab"
+        component={MainTab}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
         name="Learn"
         component={LearnScreen}
         options={{
@@ -34,11 +39,6 @@ function RootStack() {
           headerLeft: () => <View />,
           headerTitleAlign: 'center',
         }}
-      />
-      <Stack.Screen
-        name="MainTab"
-        component={MainTab}
-        options={{ headerShown: false }}
       />
       <Stack.Screen
         name="SignIn"
