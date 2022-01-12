@@ -9,6 +9,7 @@ import {
   View,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { signUp } from '../api/auth';
 import Button from '../components/common/Button';
 import LabelWithInput from '../components/common/LabelWithInput';
 import colorPalette from '../theme/colorPalette';
@@ -16,6 +17,9 @@ import { RootStackNavigationProp } from './RootStack';
 
 function SignUpScreen() {
   const navigation = useNavigation<RootStackNavigationProp>();
+  const onSignUp = () => {
+    signUp({ email: 'test@test.com', password: 'qwer1234!@' });
+  };
   return (
     <SafeAreaView style={styles.block}>
       <KeyboardAvoidingView
@@ -40,7 +44,7 @@ function SignUpScreen() {
           hasMarginBottom
           secureTextEntry
         />
-        <Button text="회원가입" onPress={() => {}} />
+        <Button text="회원가입" onPress={onSignUp} />
         <View style={styles.separator} />
         <Text style={styles.authText}>
           계정이 있으신가요?{' '}
