@@ -1,6 +1,7 @@
 import React from 'react';
 import { Pressable, StyleSheet, Text } from 'react-native';
 import colorPalette from '../../theme/colorPalette';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 interface Props {
   title: string;
@@ -10,7 +11,7 @@ interface Props {
 function FloatingButton({ title, onPress }: Props) {
   return (
     <Pressable style={styles.floatingButton} onPress={onPress}>
-      <Text style={styles.buttonText}>{title}</Text>
+      <Icon name="add" size={20} color={colorPalette.gray0} />
     </Pressable>
   );
 }
@@ -18,14 +19,14 @@ function FloatingButton({ title, onPress }: Props) {
 const styles = StyleSheet.create({
   floatingButton: {
     position: 'absolute',
-    bottom: 12,
-    left: 32,
-    right: 32,
-    height: 40,
+    bottom: 24,
+    right: 24,
+    height: 48,
+    width: 48,
+    borderRadius: 24,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: colorPalette.primary,
-    borderRadius: 8,
   },
   buttonText: {
     fontSize: 20,

@@ -30,16 +30,6 @@ function MainTab() {
         headerTitleAlign: 'center',
       }}>
       <Tab.Screen
-        name="MyWorkbook"
-        component={MyWorkbook}
-        options={{
-          title: '내 문제집',
-          tabBarIcon: ({ color, size }) => (
-            <Icon name="book" color={color} size={size} />
-          ),
-        }}
-      />
-      <Tab.Screen
         name="Home"
         component={HomeScreen}
         options={{
@@ -50,7 +40,16 @@ function MainTab() {
           ),
         }}
       />
-
+      <Tab.Screen
+        name="MyWorkbook"
+        component={MyWorkbook}
+        options={{
+          title: '내 문제집',
+          tabBarIcon: ({ color, size }) => (
+            <Icon name="book" color={color} size={size} />
+          ),
+        }}
+      />
       <Tab.Screen
         name="Settings"
         component={SettingsScreen}

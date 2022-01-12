@@ -16,7 +16,7 @@ function MyWorkbook() {
         renderItem={() => <WorkbookItem />}
         ItemSeparatorComponent={() => <View style={styles.separator} />}
         ListHeaderComponent={() => <View style={styles.separator} />}
-        ListFooterComponent={() => <View style={{ height: 64 }} />}
+        ListFooterComponent={() => <View style={styles.separator} />}
         showsVerticalScrollIndicator={false}
       />
       <FloatingButton

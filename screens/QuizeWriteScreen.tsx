@@ -1,16 +1,6 @@
 import React from 'react';
-import {
-  Keyboard,
-  KeyboardAvoidingView,
-  Platform,
-  StyleSheet,
-  View,
-} from 'react-native';
-import {
-  ScrollView,
-  TouchableWithoutFeedback,
-} from 'react-native-gesture-handler';
-import FloatingButton from '../components/common/FloatingButton';
+import { KeyboardAvoidingView, StyleSheet } from 'react-native';
+import { ScrollView } from 'react-native-gesture-handler';
 import LabelWithInput from '../components/common/LabelWithInput';
 import colorPalette from '../theme/colorPalette';
 

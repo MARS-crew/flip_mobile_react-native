@@ -24,7 +24,7 @@ function WorkbookWriteEditor() {
           data={list}
           renderItem={() => <QuizItem />}
           ItemSeparatorComponent={() => <View style={styles.separator} />}
-          ListFooterComponent={() => <View style={{ height: 64 }} />}
+          ListFooterComponent={() => <View style={styles.separator} />}
         />
       </View>
       <FloatingButton
@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
     color: colorPalette.gray6,
   },
   separator: {
-    height: 8,
+    height: 16,
   },
 });
 
