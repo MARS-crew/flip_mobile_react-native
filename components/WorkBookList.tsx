@@ -23,10 +23,10 @@ function WorkBookList({ title }: WorkBookListProps) {
         <Pressable
           style={styles.more}
           onPress={() => navigation.navigate('MyWorkbook')}>
-          <Text style={{ marginRight: 4, color: colorPalette.gray6 }}>
+          <Text style={{ marginRight: 4, color: colorPalette.gray5 }}>
             전체 보기
           </Text>
-          <Icon name="arrow-forward-ios" size={16} color={colorPalette.gray6} />
+          <Icon name="arrow-forward-ios" size={12} color={colorPalette.gray5} />
         </Pressable>
       </View>
       <Carousel

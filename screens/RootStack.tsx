@@ -66,7 +66,7 @@ function RootStack() {
         name="QuizWrite"
         component={QuizeWriteScreen}
         options={{
-          title: '문제 추가',
+          title: '퀴즈 추가',
           gestureEnabled: false,
           headerLeft: () => <View />,
           headerRight: () => (

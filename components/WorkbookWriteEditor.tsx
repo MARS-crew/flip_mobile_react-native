@@ -18,7 +18,7 @@ function WorkbookWriteEditor() {
           label="문제집 이름"
           placeholder="문제집 이름을 입력해주세요"
         />
-        <Text style={styles.quizListLabel}>문제 목록</Text>
+        <Text style={styles.quizListLabel}>퀴즈 목록</Text>
         <FlatList
           showsVerticalScrollIndicator={false}
           data={list}
