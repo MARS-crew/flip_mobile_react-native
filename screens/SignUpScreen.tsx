@@ -2,6 +2,7 @@ import { useNavigation } from '@react-navigation/native';
 import React, { ChangeEvent, useState } from 'react';
 import {
   Image,
+  Keyboard,
   KeyboardAvoidingView,
   NativeSyntheticEvent,
   Platform,
@@ -80,6 +81,13 @@ function SignUpScreen() {
     signUp({ email, password });
   };
 
+  const goToSignInScreen = () => {
+    navigation.navigate('SignIn');
+    setEmail('');
+    setPassword('');
+    setPasswordCheck('');
+    Keyboard.dismiss();
+  };
   return (
     <SafeAreaView style={styles.block}>
       <KeyboardAvoidingView
@@ -122,9 +130,7 @@ function SignUpScreen() {
         <View style={styles.separator} />
         <Text style={styles.authText}>
           계정이 있으신가요?{' '}
-          <Text
-            style={styles.strongText}
-            onPress={() => navigation.navigate('SignIn')}>
+          <Text style={styles.strongText} onPress={goToSignInScreen}>
             로그인 하러가기
           </Text>
         </Text>

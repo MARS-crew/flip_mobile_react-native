@@ -2,6 +2,7 @@ import { useNavigation } from '@react-navigation/native';
 import React, { useState } from 'react';
 import {
   Image,
+  Keyboard,
   KeyboardAvoidingView,
   Platform,
   StyleSheet,
@@ -28,6 +29,13 @@ function SignInScreen() {
     if (email == '' || password == '') return;
 
     signIn({ email, password });
+  };
+
+  const goToSignUpScreen = () => {
+    navigation.navigate('SignUp');
+    setEmail('');
+    setPassword('');
+    Keyboard.dismiss();
   };
 
   return (
@@ -62,9 +70,7 @@ function SignInScreen() {
         <View style={styles.separator} />
         <Text style={styles.authText}>
           계정이 없으신가요?{' '}
-          <Text
-            style={styles.strongText}
-            onPress={() => navigation.navigate('SignUp')}>
+          <Text style={styles.strongText} onPress={goToSignUpScreen}>
             회원가입 하러가기
           </Text>
         </Text>
