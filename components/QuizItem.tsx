@@ -1,10 +1,15 @@
+import { useNavigation } from '@react-navigation/native';
 import React from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { RootStackNavigationProp } from '../screens/RootStack';
 import colorPalette from '../theme/colorPalette';
 
 function QuizItem() {
+  const navigation = useNavigation<RootStackNavigationProp>();
   return (
-    <Pressable style={styles.block}>
+    <Pressable
+      style={styles.block}
+      onPress={() => navigation.navigate('QuizWrite')}>
       <Text style={styles.quizeText}>퀴즈아이템</Text>
       <Text style={styles.answerText}>
         어쩌구 저쩌구 어쩌구 저쩌구 어쩌구 저쩌구 어쩌구 저쩌구 어쩌구 저쩌구

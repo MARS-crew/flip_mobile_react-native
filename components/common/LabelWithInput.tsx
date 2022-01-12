@@ -1,12 +1,14 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import colorPalette from '../../theme/colorPalette';
+import { ITerm } from '../../types';
 import Input, { InputProps } from './Input';
 
 interface LabelWithInputProps extends InputProps {
   label: string;
   hasMarginBottom?: boolean;
   secureTextEntry?: boolean;
+  term?: ITerm;
 }
 
 function LabelWithInput({
@@ -15,14 +17,24 @@ function LabelWithInput({
   hasMarginBottom,
   secureTextEntry,
   multiline,
+  term,
+  ...rest
 }: LabelWithInputProps) {
   return (
     <View style={[styles.block, hasMarginBottom && styles.hasMarginBottom]}>
-      <Text style={styles.label}>{label}</Text>
+      <View style={styles.labelBlock}>
+        <Text style={styles.label}>{label}</Text>
+        {term?.value && (
+          <Text style={{ color: colorPalette.danger, fontSize: 12 }}>
+            {term.message}
+          </Text>
+        )}
+      </View>
       <Input
         placeholder={placeholder}
         secureTextEntry={secureTextEntry}
         multiline={multiline}
+        {...rest}
       />
     </View>
   );
@@ -31,6 +43,11 @@ function LabelWithInput({
 const styles = StyleSheet.create({
   block: {
     marginTop: 16,
+  },
+  labelBlock: {
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+    justifyContent: 'space-between',
   },
   label: {
     fontSize: 14,

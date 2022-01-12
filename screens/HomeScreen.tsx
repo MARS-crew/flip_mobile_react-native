@@ -1,14 +1,22 @@
 import React from 'react';
-import { View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import WorkBookList from '../components/WorkBookList';
+import colorPalette from '../theme/colorPalette';
 
 function HomeScreen() {
   return (
-    <View>
+    <View style={styles.block}>
       <WorkBookList title="🔥 인기 문제집" />
       <WorkBookList title="👋 최신 문제집" />
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  block: {
+    flex: 1,
+    backgroundColor: colorPalette.gray1,
+  },
+});
 
 export default HomeScreen;
