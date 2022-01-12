@@ -1,12 +1,27 @@
+import { useNavigation } from '@react-navigation/native';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import { clearToken } from '../api/client';
 import Button from '../components/common/Button';
+import useAuthActions from '../hooks/useAuthActions';
+import authStorage from '../storages/authStorage';
 import colorPalette from '../theme/colorPalette';
+import { RootStackNavigationProp } from './RootStack';
 
 function SettingsScreen() {
+  const { logout } = useAuthActions();
+  const navigation = useNavigation<RootStackNavigationProp>();
   return (
     <View style={styles.block}>
-      <Button text="로그아웃" onPress={() => {}} />
+      <Button
+        text="로그아웃"
+        onPress={() => {
+          logout();
+          clearToken();
+          authStorage.clear();
+          navigation.reset({ routes: [{ name: 'SignIn' }] });
+        }}
+      />
     </View>
   );
 }

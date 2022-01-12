@@ -13,7 +13,7 @@ export default function useSignIn() {
     onSuccess: (data: SignInResult) => {
       authStorage.set(data);
       applyToken(data.accessToken);
-      navigation.navigate('MainTab');
+      navigation.reset({ routes: [{ name: 'MainTab' }] });
     },
     onError: (error: Error) => {
       authStorage.clear();

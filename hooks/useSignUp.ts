@@ -14,7 +14,7 @@ export default function useSignUp() {
       authStorage.set(data);
       applyToken(data.accessToken);
       customToast.success('🎉환영합니다!🎉');
-      navigation.navigate('MainTab');
+      navigation.reset({ routes: [{ name: 'MainTab' }] });
     },
     onError: (error: Error) => {
       authStorage.clear();
