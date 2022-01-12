@@ -14,21 +14,16 @@ function WorkbookWriteHeader() {
     <>
       <View style={{ backgroundColor: '#fff', height: top }} />
       <View style={styels.headerBlock}>
-        <Pressable
-          style={styels.buttonWrap}
-          onPress={() => navigation.goBack()}>
-          <Icon name="arrow-back-ios" size={20} />
-        </Pressable>
         <Text style={styels.title}>문제집 추가</Text>
         <View style={styels.iconBlock}>
           <Pressable
             style={styels.buttonWrap}
-            onPress={() => console.log('delete')}>
+            onPress={() => navigation.goBack()}>
             <Icon name="delete" size={24} color={colorPalette.danger} />
           </Pressable>
           <Pressable
             style={[styels.buttonWrap, { marginLeft: 16 }]}
-            onPress={() => console.log('check')}>
+            onPress={() => navigation.goBack()}>
             <Icon name="check" size={24} color={colorPalette.success} />
           </Pressable>
         </View>
@@ -45,7 +40,7 @@ const styels = StyleSheet.create({
   headerBlock: {
     height: 44.5,
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'flex-end',
     alignItems: 'center',
     paddingHorizontal: 16,
     backgroundColor: colorPalette.gray0,

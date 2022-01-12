@@ -1,6 +1,8 @@
+import { useNavigation } from '@react-navigation/native';
 import React, { useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
+import { RootStackNavigationProp } from '../screens/RootStack';
 import colorPalette from '../theme/colorPalette';
 import FloatingButton from './common/FloatingButton';
 import LabelWithInput from './common/LabelWithInput';
@@ -8,6 +10,7 @@ import QuizItem from './QuizItem';
 
 function WorkbookWriteEditor() {
   const [list] = useState([1, 2, 3, 4, 5, 6, 7, 8]);
+  const navigation = useNavigation<RootStackNavigationProp>();
   return (
     <>
       <View style={styles.block}>
@@ -17,13 +20,17 @@ function WorkbookWriteEditor() {
         />
         <Text style={styles.quizListLabel}>문제 목록</Text>
         <FlatList
+          showsVerticalScrollIndicator={false}
           data={list}
           renderItem={() => <QuizItem />}
           ItemSeparatorComponent={() => <View style={styles.separator} />}
           ListFooterComponent={() => <View style={{ height: 64 }} />}
         />
       </View>
-      <FloatingButton title="문제 추가" onPress={() => {}} />
+      <FloatingButton
+        title="문제 추가"
+        onPress={() => navigation.navigate('QuizWrite')}
+      />
     </>
   );
 }

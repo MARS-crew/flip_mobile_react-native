@@ -14,11 +14,16 @@ function LabelWithInput({
   placeholder,
   hasMarginBottom,
   secureTextEntry,
+  multiline,
 }: LabelWithInputProps) {
   return (
     <View style={[styles.block, hasMarginBottom && styles.hasMarginBottom]}>
       <Text style={styles.label}>{label}</Text>
-      <Input placeholder={placeholder} secureTextEntry={secureTextEntry} />
+      <Input
+        placeholder={placeholder}
+        secureTextEntry={secureTextEntry}
+        multiline={multiline}
+      />
     </View>
   );
 }

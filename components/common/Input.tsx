@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
-import { StyleSheet, TextInput } from 'react-native';
+import { Keyboard, StyleSheet, TextInput } from 'react-native';
 import colorPalette from '../../theme/colorPalette';
 
 export interface InputProps {
   placeholder: string;
   secureTextEntry?: boolean;
+  multiline?: boolean;
 }
 
-function Input({ placeholder, secureTextEntry }: InputProps) {
+function Input({ placeholder, secureTextEntry, multiline }: InputProps) {
   const [isFocus, setIsFocus] = useState(false);
   return (
     <TextInput
@@ -17,7 +18,16 @@ function Input({ placeholder, secureTextEntry }: InputProps) {
       placeholder={placeholder}
       placeholderTextColor={colorPalette.gray4}
       selectionColor={colorPalette.primary}
-      style={[styles.input, isFocus && styles.focus]}
+      style={[
+        styles.input,
+        isFocus && styles.focus,
+        multiline && styles.multiline,
+      ]}
+      multiline={multiline}
+      returnKeyLabel="완료"
+      // returnKeyType="done"
+      // blurOnSubmit={true}
+      // onSubmitEditing={() => Keyboard.dismiss()}
     />
   );
 }
@@ -43,6 +53,7 @@ const styles = StyleSheet.create({
   focus: {
     borderColor: colorPalette.primary,
   },
+  multiline: { height: 200, paddingTop: 16, textAlignVertical: 'top' },
 });
 
 export default Input;
