@@ -1,6 +1,9 @@
 import React from 'react';
 import { BaseToast, BaseToastProps } from 'react-native-toast-message';
 import colorPalette from '../theme/colorPalette';
+import Toast from 'react-native-toast-message';
+import { Error } from '../types';
+import { getErrorMessage } from '.';
 
 const toastConfig = {
   success: (props: BaseToastProps) => (
@@ -37,6 +40,12 @@ const toastConfig = {
       }}
     />
   ),
+};
+
+export const customToast = {
+  error: (error: Error) =>
+    Toast.show({ type: 'error', text1: getErrorMessage(error) }),
+  success: (message: string) => Toast.show({ type: 'success', text1: message }),
 };
 
 export default toastConfig;

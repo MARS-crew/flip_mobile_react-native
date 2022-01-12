@@ -7,7 +7,7 @@ export interface SignUpResult {
 
 export interface SignInResult extends SignUpResult {}
 
-export type AuthError = AxiosError<{
+export type Error = AxiosError<{
   statusCode: number;
   error: string;
   message: string | string[];
