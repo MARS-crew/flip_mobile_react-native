@@ -1,5 +1,5 @@
 import { useNavigation } from '@react-navigation/native';
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Image,
   KeyboardAvoidingView,
@@ -11,11 +11,25 @@ import {
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Button from '../components/common/Button';
 import LabelWithInput from '../components/common/LabelWithInput';
+import useSignIn from '../hooks/useSignIn';
 import colorPalette from '../theme/colorPalette';
 import { RootStackNavigationProp } from './RootStack';
 
 function SignInScreen() {
   const navigation = useNavigation<RootStackNavigationProp>();
+  const { mutate: signIn, isLoading } = useSignIn();
+
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const onPress = () => {
+    if (isLoading) return;
+
+    if (email == '' || password == '') return;
+
+    signIn({ email, password });
+  };
+
   return (
     <SafeAreaView style={styles.block}>
       <KeyboardAvoidingView
@@ -28,14 +42,23 @@ function SignInScreen() {
         <View style={styles.logoBlock}>
           <Image source={require('../assets/images/Logo.png')} />
         </View>
-        <LabelWithInput label="아이디" placeholder="아이디를 입력해주세요" />
+        <LabelWithInput
+          keyboardType="email-address"
+          textContentType="emailAddress"
+          label="아이디"
+          placeholder="아이디를 입력해주세요"
+          value={email}
+          onChangeText={setEmail}
+        />
         <LabelWithInput
           label="비밀번호"
           placeholder="비밀번호를 입력해주세요"
           hasMarginBottom
           secureTextEntry
+          value={password}
+          onChangeText={setPassword}
         />
-        <Button text="로그인" onPress={() => {}} />
+        <Button text="로그인" onPress={onPress} />
         <View style={styles.separator} />
         <Text style={styles.authText}>
           계정이 없으신가요?{' '}

@@ -73,6 +73,7 @@ function SignUpScreen() {
   const onPress = () => {
     if (isLoading) return;
 
+    if (email == '' || password == '' || passwordCheck == '') return;
     if (emailTerm.value || passwordTerm.value || passwordCheckTerm.value)
       return;
 

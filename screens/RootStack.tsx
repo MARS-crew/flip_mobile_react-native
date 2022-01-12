@@ -34,6 +34,11 @@ function RootStack() {
   return (
     <Stack.Navigator>
       <Stack.Screen
+        name="SignIn"
+        component={SignInScreen}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
         name="SignUp"
         component={SignUpScreen}
         options={{ headerShown: false }}
@@ -52,12 +57,6 @@ function RootStack() {
           headerTitleAlign: 'center',
         }}
       />
-      <Stack.Screen
-        name="SignIn"
-        component={SignInScreen}
-        options={{ headerShown: false }}
-      />
-
       <Stack.Screen
         name="WorkbookWrite"
         component={WorkbookWriteScreen}
