@@ -14,10 +14,10 @@ const authStorage = {
       return null;
     }
   },
-  set(data: SignUpResult | SignInResult) {
-    return AsyncStorage.setItem(key, JSON.stringify(data));
+  async set(data: SignUpResult | SignInResult) {
+    return await AsyncStorage.setItem(key, JSON.stringify(data));
   },
-  clear() {
+  async clear() {
     return AsyncStorage.removeItem(key);
   },
 };

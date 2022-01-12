@@ -5,6 +5,7 @@ import RootStack from './screens/RootStack';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import Toast from 'react-native-toast-message';
 import toastConfig from './utils/\btoastConfig';
+import { RecoilRoot } from 'recoil';
 
 StatusBar.setBarStyle('dark-content');
 
@@ -12,12 +13,14 @@ const queryClient = new QueryClient();
 
 function App() {
   return (
-    <QueryClientProvider client={queryClient}>
-      <NavigationContainer>
-        <RootStack />
-        <Toast position="top" config={toastConfig} />
-      </NavigationContainer>
-    </QueryClientProvider>
+    <RecoilRoot>
+      <QueryClientProvider client={queryClient}>
+        <NavigationContainer>
+          <RootStack />
+          <Toast position="top" config={toastConfig} />
+        </NavigationContainer>
+      </QueryClientProvider>
+    </RecoilRoot>
   );
 }
 

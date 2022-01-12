@@ -19,6 +19,7 @@
     "@types/react-native-dotenv": "^0.2.0",
     "@types/react-native-snap-carousel": "^3.8.5",
     "axios": "^0.24.0",
+    "pod-install": "^0.1.31",
     "react": "17.0.2",
     "react-native": "0.66.4",
     "react-native-card-flip": "^1.0.7",
@@ -31,6 +32,7 @@
     "react-native-toast-message": "^2.1.1",
     "react-native-vector-icons": "^9.0.0",
     "react-query": "^3.34.7",
+    "recoil": "^0.5.2",
     "styled-components": "^5.3.3"
   },
   "devDependencies": {

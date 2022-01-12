@@ -2,7 +2,7 @@ import {
   createNativeStackNavigator,
   NativeStackNavigationProp,
 } from '@react-navigation/native-stack';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Pressable, View } from 'react-native';
 import LearnScreen from './LearnScreen';
 import MainTab from './MainTab';
@@ -14,6 +14,9 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import IconButton from '../components/common/IconButton';
 import colorPalette from '../theme/colorPalette';
 import { useNavigation } from '@react-navigation/native';
+import authStorage from '../storages/authStorage';
+import useAuthLoadEffect from '../hooks/useAuthLoadEffect';
+import useUser from '../hooks/useUser';
 
 type RootStackParamList = {
   MainTab: undefined;
@@ -31,18 +34,24 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 
 function RootStack() {
   const navigation = useNavigation<RootStackNavigationProp>();
+  const user = useUser();
+  useAuthLoadEffect();
   return (
     <Stack.Navigator>
-      <Stack.Screen
-        name="SignIn"
-        component={SignInScreen}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="SignUp"
-        component={SignUpScreen}
-        options={{ headerShown: false }}
-      />
+      {!user && (
+        <>
+          <Stack.Screen
+            name="SignIn"
+            component={SignInScreen}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="SignUp"
+            component={SignUpScreen}
+            options={{ headerShown: false }}
+          />
+        </>
+      )}
       <Stack.Screen
         name="MainTab"
         component={MainTab}
