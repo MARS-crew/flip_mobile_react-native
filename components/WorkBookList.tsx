@@ -29,7 +29,7 @@ function WorkBookList({ title }: WorkBookListProps) {
           <Icon name="arrow-forward-ios" size={12} color={colorPalette.gray5} />
         </Pressable>
       </View>
-      <Carousel
+      {/* <Carousel
         activeSlideAlignment="start"
         data={list}
         renderItem={() => <WorkbookItem />}
@@ -38,7 +38,7 @@ function WorkBookList({ title }: WorkBookListProps) {
         inactiveSlideOpacity={1}
         inactiveSlideScale={1}
         slideStyle={{ marginLeft: 10 }}
-      />
+      /> */}
     </View>
   );
 }
