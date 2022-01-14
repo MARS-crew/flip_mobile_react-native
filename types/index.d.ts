@@ -19,16 +19,11 @@ export interface ITerm {
 }
 
 export interface WorkbookListResult {
-  items: Item[];
+  items: Workbook[];
   meta: Meta;
 }
 
-export interface Item {
-  id: number;
-  title: string;
-  createdAt: Date;
-  updatedAt: Date;
-  user: User;
+export interface Workbook extends CreateWorkbookResult {
   cards: Card[];
 }
 
@@ -59,4 +54,17 @@ export interface Meta {
   itemsPerPage: number;
   totalPages: number;
   currentPage: number;
+}
+
+export interface CardParams {
+  question: string;
+  result: string;
+}
+
+export interface CreateWorkbookResult {
+  id: number;
+  title: string;
+  user: User;
+  createdAt: Date;
+  updatedAt: Date;
 }

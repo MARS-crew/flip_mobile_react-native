@@ -1,4 +1,4 @@
-import { WorkbookListResult } from '../types';
+import { Card, CreateWorkbookResult, WorkbookListResult } from '../types';
 import client from './client';
 
 export async function getMyWorkbooks({
@@ -11,5 +11,10 @@ export async function getMyWorkbooks({
   const response = await client.get<WorkbookListResult>(
     `workbooks/me?page=${cursor}&limit=${limit}`,
   );
+  return response.data;
+}
+
+export async function createWorkbook(params: { title: string }) {
+  const response = await client.post<CreateWorkbookResult>('workbooks', params);
   return response.data;
 }

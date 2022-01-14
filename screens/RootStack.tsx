@@ -15,15 +15,17 @@ import colorPalette from '../theme/colorPalette';
 import { useNavigation } from '@react-navigation/native';
 import useAuthLoadEffect from '../hooks/useAuthLoadEffect';
 import useUser from '../hooks/useUser';
-import { Item } from '../types';
+import { Workbook } from '../types';
 
 export type RootStackParamList = {
   MainTab: undefined;
   SignUp: undefined;
   SignIn: undefined;
-  WorkbookWrite: undefined;
+  WorkbookWrite: {
+    item: Workbook | null;
+  };
   Learn: {
-    item: Item;
+    item: Workbook;
   };
   QuizWrite: undefined;
 };
