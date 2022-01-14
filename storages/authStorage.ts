@@ -1,4 +1,4 @@
-import AsyncStorage from '@react-native-community/async-storage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { SignInResult, SignUpResult } from '../types';
 
 const key = 'auth';
@@ -18,7 +18,7 @@ const authStorage = {
     return await AsyncStorage.setItem(key, JSON.stringify(data));
   },
   async clear() {
-    return AsyncStorage.removeItem(key);
+    return await AsyncStorage.removeItem(key);
   },
 };
 
