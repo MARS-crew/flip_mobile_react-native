@@ -6,8 +6,9 @@ import colorPalette from '../theme/colorPalette';
 function HomeScreen() {
   return (
     <View style={styles.block}>
+      <WorkBookList title="👋 나의 문제집" />
       <WorkBookList title="🔥 인기 문제집" />
-      <WorkBookList title="👋 최신 문제집" />
+      <WorkBookList title="🌱 최신 문제집" />
     </View>
   );
 }
