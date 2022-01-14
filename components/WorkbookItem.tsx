@@ -3,24 +3,23 @@ import React from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { RootStackNavigationProp } from '../screens/RootStack';
 import colorPalette from '../theme/colorPalette';
-import { Item } from '../types';
+import { Workbook } from '../types';
 
 interface IWorkbookItem {
-  item: Item;
+  item: Workbook;
   itemWidth?: number;
   gap?: number;
 }
 
 function WorkbookItem({ item, itemWidth, gap }: IWorkbookItem) {
   const navigation = useNavigation<RootStackNavigationProp>();
-  console.log(item);
   return (
     <View
       style={[
         styles.block,
         { width: itemWidth ?? 'auto', marginHorizontal: gap ?? 0 },
       ]}>
-      <Pressable onPress={() => navigation.navigate('Learn', { item })}>
+      <Pressable onPress={() => navigation.navigate('WorkbookWrite', { item })}>
         <View style={styles.headerBlock}>
           <Text style={styles.titleText}>{item.title}</Text>
         </View>

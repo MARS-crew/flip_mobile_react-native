@@ -5,22 +5,32 @@ import colorPalette from '../../theme/colorPalette';
 
 interface ButtonProps {
   text: string;
+  color?: 'transparent';
+  hasMarginLeft?: boolean;
   onPress: () => void;
 }
 
-function Button({ text, onPress }: ButtonProps) {
+function Button({ text, color, hasMarginLeft, onPress }: ButtonProps) {
   return (
-    <View style={styles.block}>
-      <Pressable style={styles.button} onPress={onPress}>
-        <Text style={styles.text}>{text}</Text>
-      </Pressable>
-    </View>
+    <Pressable
+      style={[
+        styles.button,
+        color && styles[color],
+        hasMarginLeft && { marginLeft: 8 },
+      ]}
+      onPress={onPress}>
+      <Text style={[styles.text, color && styles[`text_${color}`]]}>
+        {text}
+      </Text>
+    </Pressable>
   );
 }
 
 const styles = StyleSheet.create({
-  block: {
-    height: 40,
+  button: {
+    padding: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
     borderRadius: 8,
     shadowColor: colorPalette.gray6,
     shadowOpacity: 0.1,
@@ -32,15 +42,18 @@ const styles = StyleSheet.create({
     elevation: 5,
     backgroundColor: colorPalette.primary,
   },
-  button: {
-    height: 40,
-    justifyContent: 'center',
-    alignItems: 'center',
+  transparent: {
+    backgroundColor: 'white',
+    borderWidth: 1,
+    borderColor: colorPalette.primary,
   },
   text: {
     fontSize: 16,
     fontWeight: 'bold',
     color: colorPalette.gray0,
+  },
+  text_transparent: {
+    color: colorPalette.primary,
   },
 });
 

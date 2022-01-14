@@ -1,29 +1,36 @@
 import { useNavigation } from '@react-navigation/native';
 import React from 'react';
-import { Pressable, StatusBar, StyleSheet, Text, View } from 'react-native';
+import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { RootStackNavigationProp } from '../screens/RootStack';
 import colorPalette from '../theme/colorPalette';
-import LabelWithInput from './common/LabelWithInput';
+import { Workbook } from '../types';
 
-function WorkbookWriteHeader() {
+interface WorkbookWriteHeaderProps {
+  item: Workbook | null;
+  onSave: () => void;
+}
+
+function WorkbookWriteHeader({ item, onSave }: WorkbookWriteHeaderProps) {
   const { top } = useSafeAreaInsets();
   const navigation = useNavigation<RootStackNavigationProp>();
   return (
     <>
       <View style={{ backgroundColor: '#fff', height: top }} />
       <View style={styels.headerBlock}>
-        <Text style={styels.title}>문제집 추가</Text>
+        <Text style={styels.title}>문제집 {item ? '수정' : '추가'}</Text>
         <View style={styels.iconBlock}>
-          <Pressable
-            style={styels.buttonWrap}
-            onPress={() => navigation.goBack()}>
-            <Icon name="delete" size={24} color={colorPalette.danger} />
-          </Pressable>
+          {item && (
+            <Pressable
+              style={styels.buttonWrap}
+              onPress={() => navigation.goBack()}>
+              <Icon name="delete" size={24} color={colorPalette.danger} />
+            </Pressable>
+          )}
           <Pressable
             style={[styels.buttonWrap, { marginLeft: 16 }]}
-            onPress={() => navigation.goBack()}>
+            onPress={onSave}>
             <Icon name="check" size={24} color={colorPalette.success} />
           </Pressable>
         </View>
