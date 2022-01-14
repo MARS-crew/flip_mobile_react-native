@@ -3,31 +3,38 @@ import React from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { RootStackNavigationProp } from '../screens/RootStack';
 import colorPalette from '../theme/colorPalette';
+import { Item } from '../types';
 
 interface IWorkbookItem {
+  item: Item;
   itemWidth?: number;
   gap?: number;
 }
 
-function WorkbookItem({ itemWidth, gap }: IWorkbookItem) {
+function WorkbookItem({ item, itemWidth, gap }: IWorkbookItem) {
   const navigation = useNavigation<RootStackNavigationProp>();
+  console.log(item);
   return (
     <View
       style={[
         styles.block,
         { width: itemWidth ?? 'auto', marginHorizontal: gap ?? 0 },
       ]}>
-      <Pressable onPress={() => navigation.navigate('Learn')}>
+      <Pressable onPress={() => navigation.navigate('Learn', { item })}>
         <View style={styles.headerBlock}>
-          <Text style={styles.titleText}>문제집 이름</Text>
+          <Text style={styles.titleText}>{item.title}</Text>
         </View>
         <View style={styles.bodyBlock}>
           <View style={styles.defaultThumbnail}>
-            <Text style={styles.firstText}>N</Text>
+            <Text style={styles.firstText}>
+              {item.user.email[0].toUpperCase()}
+            </Text>
           </View>
           <View>
-            <Text style={styles.nickname}>narc2ss</Text>
-            <Text style={styles.dateText}>21. 12. 20 · 총 0개의 문제</Text>
+            <Text style={styles.nickname}>{item.user.email}</Text>
+            <Text style={styles.dateText}>
+              {item.createdAt} · {item.cards.length}개 문제
+            </Text>
           </View>
         </View>
       </Pressable>

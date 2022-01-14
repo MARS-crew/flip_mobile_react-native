@@ -17,13 +17,16 @@ import { useNavigation } from '@react-navigation/native';
 import authStorage from '../storages/authStorage';
 import useAuthLoadEffect from '../hooks/useAuthLoadEffect';
 import useUser from '../hooks/useUser';
+import { Item } from '../types';
 
 type RootStackParamList = {
   MainTab: undefined;
   SignUp: undefined;
   SignIn: undefined;
   WorkbookWrite: undefined;
-  Learn: undefined;
+  Learn: {
+    item: Item;
+  };
   QuizWrite: undefined;
 };
 
