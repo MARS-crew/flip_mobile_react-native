@@ -1,4 +1,4 @@
-import { useNavigation } from '@react-navigation/native';
+import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 import React from 'react';
 import { Dimensions, Text, View } from 'react-native';
 import Carousel from 'react-native-snap-carousel';
@@ -6,29 +6,36 @@ import styled from 'styled-components/native';
 import Button from '../components/common/Button';
 import QuizFlipItem from '../components/QuizFlipItem';
 import colorPalette from '../theme/colorPalette';
-import { RootStackNavigationProp } from './RootStack';
+import { RootStackNavigationProp, RootStackParamList } from './RootStack';
+
+type LearnScreenProps = RouteProp<RootStackParamList, 'Learn'>;
 
 function LearnScreen() {
   const screenWidth = Dimensions.get('window').width;
   const navigation = useNavigation<RootStackNavigationProp>();
+  const { params } = useRoute<LearnScreenProps>();
+  const item = params.item;
+
   return (
     <Block>
       <LearnHeader>
-        <QuizTitle>프론트엔드 면접 예상 질문</QuizTitle>
+        <QuizTitle>{item.title}</QuizTitle>
         <WorkbookInfoBlock>
           <Thumbnail>
-            <Text>N</Text>
+            <Text>{item.user.email[0].toUpperCase()}</Text>
           </Thumbnail>
           <View>
-            <Nickname>narc2ss</Nickname>
-            <DateText>21. 12. 20 · 총 0개의 문제</DateText>
+            <Nickname>{item.user.email}</Nickname>
+            <DateText>
+              {item.user.email} · {item.cards.length}개 문제
+            </DateText>
           </View>
         </WorkbookInfoBlock>
       </LearnHeader>
       <Carousel
         activeSlideAlignment="center"
-        data={[1, 2, 3]}
-        renderItem={() => <QuizFlipItem />}
+        data={item.cards}
+        renderItem={data => <QuizFlipItem card={data.item} inx={data.index} />}
         sliderWidth={screenWidth}
         itemWidth={screenWidth - 80}
         inactiveSlideOpacity={1}

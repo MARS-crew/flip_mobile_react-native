@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useCallback, useRef, useState } from 'react';
 import {
   Dimensions,
   View,
@@ -6,13 +6,19 @@ import {
   StyleSheet,
   Text,
   Pressable,
+  ListRenderItemInfo,
 } from 'react-native';
 import colorPalette from '../theme/colorPalette';
-import Button from './common/Button';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { ScrollView } from 'react-native-gesture-handler';
+import { Card } from '../types';
 
-function QuizFlipItem() {
+interface QuizFlipItemProps {
+  card: Card;
+  inx: number;
+}
+
+function QuizFlipItem({ card, inx }: QuizFlipItemProps) {
   const [isFliped, setIsFliped] = useState(false);
   const screenHeight = Dimensions.get('window').height;
   const animation = useRef(new Animated.Value(0)).current;
@@ -52,7 +58,9 @@ function QuizFlipItem() {
   return (
     <View style={{ height: screenHeight * 0.6 }}>
       <Animated.View style={[styles.flipCard, frontInterpolate]}>
-        <Text style={styles.title}>1. 문제</Text>
+        <Text style={styles.title}>
+          {inx + 1}. {card.question}
+        </Text>
         <View style={styles.frontFlex}>
           <Text style={styles.frontFlexText}>할 수 있다!</Text>
         </View>
@@ -63,48 +71,11 @@ function QuizFlipItem() {
       </Animated.View>
       <Animated.View
         style={[styles.flipCard, styles.flipCardBack, backInterpolate]}>
-        <Text style={styles.title}>1. 문제</Text>
+        <Text style={styles.title}>
+          {inx + 1}. {card.question}
+        </Text>
         <ScrollView style={styles.backFlex}>
-          <Text style={styles.answerText}>
-            자바스크립트에선 실행 중인 함수, 코드 블록 스크립트 전체는 렉시컬
-            환경(Lexical Environment) 이라 불리는 내부 숨김 연관 객체(internal
-            hidden associated object)를 갖습니다. 렉시컬 환경 객체는 두 부분으로
-            구성됩니다. 환경 레코드(Environment Record) – 모든 지역 변수를
-            프로퍼티로 저장하고 있는 객체입니다. this 값과 같은 기타 정보도
-            여기에 저장됩니다. 외부 렉시컬 환경(Outer Lexical Environment) 에
-            대한 참조 – 외부 코드와 연관됨 ’변수’는 특수 내부 객체인 환경
-            레코드의 프로퍼티일 뿐입니다. '변수를 가져오거나 변경’하는 것은
-            '환경 레코드의 프로퍼티를 가져오거나 변경’함을 의미합니다. 아래 두
-            줄짜리 코드엔 렉시컬 환경이 하나만 존재합니다. 프로퍼티로 저장하고
-            있는 객체입니다. this 값과 같은 기타 정보도 여기에 저장됩니다. 외부
-            렉시컬 환경(Outer Lexical Environment) 에 대한 참조 – 외부 코드와
-            연관됨 ’변수’는 특수 내부 객체인 환경 레코드의 프로퍼티일 뿐입니다.
-            '변수를 가져오거나 변경’하는 것은 '환경 레코드의 프로퍼티를
-            가져오거나 변경’함을 의미합니다. 아래 두 줄짜리 코드엔 렉시컬 환경이
-            하나만 존재합니다. 프로퍼티로 저장하고 있는 객체입니다. this 값과
-            같은 기타 정보도 여기에 저장됩니다. 외부 렉시컬 환경(Outer Lexical
-            Environment) 에 대한 참조 – 외부 코드와 연관됨 ’변수’는 특수 내부
-            객체인 환경 레코드의 프로퍼티일 뿐입니다. '변수를 가져오거나
-            변경’하는 것은 '환경 레코드의 프로퍼티를 가져오거나 변경’함을
-            의미합니다. 아래 두 줄짜리 코드엔 렉시컬 환경이 하나만 존재합니다.
-            프로퍼티로 저장하고 있는 객체입니다. this 값과 같은 기타 정보도
-            여기에 저장됩니다. 외부 렉시컬 환경(Outer Lexical Environment) 에
-            대한 참조 – 외부 코드와 연관됨 ’변수’는 특수 내부 객체인 환경
-            레코드의 프로퍼티일 뿐입니다. '변수를 가져오거나 변경’하는 것은
-            '환경 레코드의 프로퍼티를 가져오거나 변경’함을 의미합니다. 아래 두
-            줄짜리 코드엔 렉시컬 환경이 하나만 존재합니다. 프로퍼티로 저장하고
-            있는 객체입니다. this 값과 같은 기타 정보도 여기에 저장됩니다. 외부
-            렉시컬 환경(Outer Lexical Environment) 에 대한 참조 – 외부 코드와
-            연관됨 ’변수’는 특수 내부 객체인 환경 레코드의 프로퍼티일 뿐입니다.
-            '변수를 가져오거나 변경’하는 것은 '환경 레코드의 프로퍼티를
-            가져오거나 변경’함을 의미합니다. 아래 두 줄짜리 코드엔 렉시컬 환경이
-            하나만 존재합니다. 프로퍼티로 저장하고 있는 객체입니다. this 값과
-            같은 기타 정보도 여기에 저장됩니다. 외부 렉시컬 환경(Outer Lexical
-            Environment) 에 대한 참조 – 외부 코드와 연관됨 ’변수’는 특수 내부
-            객체인 환경 레코드의 프로퍼티일 뿐입니다. '변수를 가져오거나
-            변경’하는 것은 '환경 레코드의 프로퍼티를 가져오거나 변경’함을
-            의미합니다. 아래 두 줄짜리 코드엔 렉시컬 환경이 하나만 존재합니다.
-          </Text>
+          <Text style={styles.answerText}>{card.result}</Text>
         </ScrollView>
         <Pressable style={styles.button} onPress={flip}>
           <Text style={styles.buttonText}>한번 더!</Text>

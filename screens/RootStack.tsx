@@ -2,24 +2,22 @@ import {
   createNativeStackNavigator,
   NativeStackNavigationProp,
 } from '@react-navigation/native-stack';
-import React, { useEffect } from 'react';
-import { Pressable, View } from 'react-native';
+import React from 'react';
+import { View } from 'react-native';
 import LearnScreen from './LearnScreen';
 import MainTab from './MainTab';
 import QuizeWriteScreen from './QuizeWriteScreen';
 import SignInScreen from './SignInScreen';
 import SignUpScreen from './SignUpScreen';
 import WorkbookWriteScreen from './WorkbookWriteScreen';
-import Icon from 'react-native-vector-icons/MaterialIcons';
 import IconButton from '../components/common/IconButton';
 import colorPalette from '../theme/colorPalette';
 import { useNavigation } from '@react-navigation/native';
-import authStorage from '../storages/authStorage';
 import useAuthLoadEffect from '../hooks/useAuthLoadEffect';
 import useUser from '../hooks/useUser';
 import { Item } from '../types';
 
-type RootStackParamList = {
+export type RootStackParamList = {
   MainTab: undefined;
   SignUp: undefined;
   SignIn: undefined;
