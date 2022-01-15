@@ -24,10 +24,10 @@ export interface WorkbookListResult {
 }
 
 export interface Workbook extends CreateWorkbookResult {
-  cards: Card[];
+  cards: Quiz[];
 }
 
-export interface Card {
+export interface Quiz {
   id: number;
   question: string;
   result: string;
@@ -56,7 +56,7 @@ export interface Meta {
   currentPage: number;
 }
 
-export interface CardParams {
+export interface QuizParams {
   question: string;
   result: string;
 }
@@ -67,4 +67,14 @@ export interface CreateWorkbookResult {
   user: User;
   createdAt: Date;
   updatedAt: Date;
+}
+
+export interface CreateQuizParams {
+  workbookId: number;
+  quiz: QuizParams;
+}
+
+export interface ModifyQuizParams {
+  cardId: number;
+  quiz: QuizParams;
 }

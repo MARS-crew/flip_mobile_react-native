@@ -13,13 +13,16 @@ interface IWorkbookItem {
 
 function WorkbookItem({ item, itemWidth, gap }: IWorkbookItem) {
   const navigation = useNavigation<RootStackNavigationProp>();
+  const onPress = () => {
+    navigation.navigate('WorkbookWrite', { id: item.id });
+  };
   return (
     <View
       style={[
         styles.block,
         { width: itemWidth ?? 'auto', marginHorizontal: gap ?? 0 },
       ]}>
-      <Pressable onPress={() => navigation.navigate('WorkbookWrite', { item })}>
+      <Pressable onPress={onPress}>
         <View style={styles.headerBlock}>
           <Text style={styles.titleText}>{item.title}</Text>
         </View>

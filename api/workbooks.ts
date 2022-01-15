@@ -1,4 +1,10 @@
-import { Card, CreateWorkbookResult, WorkbookListResult } from '../types';
+import {
+  CreateWorkbookResult,
+  WorkbookListResult,
+  CreateQuizParams,
+  ModifyQuizParams,
+  Workbook,
+} from '../types';
 import client from './client';
 
 export async function getMyWorkbooks({
@@ -16,5 +22,26 @@ export async function getMyWorkbooks({
 
 export async function createWorkbook(params: { title: string }) {
   const response = await client.post<CreateWorkbookResult>('workbooks', params);
+  return response.data;
+}
+
+export async function getWorkbook(id: number) {
+  const response = await client.get<Workbook>(`workbooks/${id}`);
+  return response.data;
+}
+
+export async function addQuiz(params: CreateQuizParams) {
+  const response = await client.post(
+    `workbooks/${params.workbookId}/cards`,
+    params.quiz,
+  );
+  return response.data;
+}
+
+export async function modifyQuiz(params: ModifyQuizParams) {
+  const response = await client.patch(
+    `workbooks/cards/${params.cardId}`,
+    params.quiz,
+  );
   return response.data;
 }

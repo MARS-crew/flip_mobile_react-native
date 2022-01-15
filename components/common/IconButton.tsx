@@ -4,7 +4,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 
 interface Props {
   name: string;
-  color: string;
+  color?: string;
   onPress: () => void;
   hasMarginLeft?: boolean;
 }

@@ -1,26 +1,30 @@
-import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
-import React, { useState } from 'react';
+import { RouteProp, useRoute } from '@react-navigation/native';
+import React from 'react';
+import { Text } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { useQuery } from 'react-query';
+import { getWorkbook } from '../api/workbooks';
 import WorkbookWriteEditor from '../components/WorkbookWriteEditor';
 import WorkbookWriteHeader from '../components/WorkbookWriteHeader';
-import { RootStackNavigationProp, RootStackParamList } from './RootStack';
+import { RootStackParamList } from './RootStack';
 
-type WorkbookWriteScreen = RouteProp<RootStackParamList, 'WorkbookWrite'>;
+type WorkbookWriteParams = RouteProp<RootStackParamList, 'WorkbookWrite'>;
 
 function WorkbookWriteScreen() {
-  const { params } = useRoute<WorkbookWriteScreen>();
-  const item = params.item;
-  const navigation = useNavigation<RootStackNavigationProp>();
-  const [title, setTitle] = useState('');
+  const { params } = useRoute<WorkbookWriteParams>();
+  const id = params.id;
 
-  const onSave = () => {
-    console.log(title);
-    navigation.goBack();
-  };
+  const {
+    data: workbook,
+    isLoading,
+    isError,
+  } = useQuery(['workbook', id], () => getWorkbook(id));
+  if (isLoading) return <Text>Loading...</Text>;
+  if (isError) return <Text>error occurred!</Text>;
   return (
     <SafeAreaView edges={['bottom']} style={{ flex: 1 }}>
-      <WorkbookWriteHeader item={item} onSave={onSave} />
-      <WorkbookWriteEditor item={item} title={title} setTitle={setTitle} />
+      <WorkbookWriteHeader onSave={() => {}} />
+      <WorkbookWriteEditor workbook={workbook!} />
     </SafeAreaView>
   );
 }

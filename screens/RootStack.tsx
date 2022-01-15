@@ -10,33 +10,32 @@ import QuizeWriteScreen from './QuizeWriteScreen';
 import SignInScreen from './SignInScreen';
 import SignUpScreen from './SignUpScreen';
 import WorkbookWriteScreen from './WorkbookWriteScreen';
-import IconButton from '../components/common/IconButton';
-import colorPalette from '../theme/colorPalette';
-import { useNavigation } from '@react-navigation/native';
 import useAuthLoadEffect from '../hooks/useAuthLoadEffect';
 import useUser from '../hooks/useUser';
-import { Workbook } from '../types';
+import { Quiz, Workbook } from '../types';
 
 export type RootStackParamList = {
   MainTab: undefined;
   SignUp: undefined;
   SignIn: undefined;
   WorkbookWrite: {
-    item: Workbook | null;
+    id: number;
   };
   Learn: {
     item: Workbook;
   };
-  QuizWrite: undefined;
+  QuizWrite: {
+    quiz: Quiz | null;
+    workbookId: number;
+  };
 };
 
 export type RootStackNavigationProp =
   NativeStackNavigationProp<RootStackParamList>;
 
-const Stack = createNativeStackNavigator<RootStackParamList>();
+export const Stack = createNativeStackNavigator<RootStackParamList>();
 
 function RootStack() {
-  const navigation = useNavigation<RootStackNavigationProp>();
   const user = useUser();
   useAuthLoadEffect();
   return (
@@ -58,7 +57,7 @@ function RootStack() {
       <Stack.Screen
         name="MainTab"
         component={MainTab}
-        options={{ headerShown: false, gestureEnabled: false }}
+        options={{ headerShown: false }}
       />
       <Stack.Screen
         name="Learn"
@@ -67,36 +66,18 @@ function RootStack() {
           title: '학습하기',
           headerLeft: () => <View />,
           headerTitleAlign: 'center',
+          gestureEnabled: false,
         }}
       />
       <Stack.Screen
         name="WorkbookWrite"
         component={WorkbookWriteScreen}
-        options={{ headerShown: false, gestureEnabled: false }}
+        options={{ headerShown: false }}
       />
       <Stack.Screen
         name="QuizWrite"
         component={QuizeWriteScreen}
-        options={{
-          title: '퀴즈 추가',
-          gestureEnabled: false,
-          headerLeft: () => <View />,
-          headerRight: () => (
-            <View style={{ flexDirection: 'row' }}>
-              <IconButton
-                name="delete"
-                color={colorPalette.danger}
-                onPress={() => navigation.goBack()}
-              />
-              <IconButton
-                name="check"
-                color={colorPalette.success}
-                hasMarginLeft
-                onPress={() => navigation.goBack()}
-              />
-            </View>
-          ),
-        }}
+        options={{ headerShown: false }}
       />
     </Stack.Navigator>
   );

@@ -1,49 +1,73 @@
 import { useNavigation } from '@react-navigation/native';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Image, StyleSheet, Text, View } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
 import { RootStackNavigationProp } from '../screens/RootStack';
 import colorPalette from '../theme/colorPalette';
 import { Workbook } from '../types';
 import FloatingButton from './common/FloatingButton';
+import IconButton from './common/IconButton';
 import LabelWithInput from './common/LabelWithInput';
 import QuizItem from './QuizItem';
 
 interface WorkbookWriteEditorProps {
-  item: Workbook | null;
-  title: string;
-  setTitle: React.Dispatch<React.SetStateAction<string>>;
+  workbook: Workbook;
 }
 
-function WorkbookWriteEditor({
-  item,
-  title,
-  setTitle,
-}: WorkbookWriteEditorProps) {
+function WorkbookWriteEditor({ workbook }: WorkbookWriteEditorProps) {
   const navigation = useNavigation<RootStackNavigationProp>();
+  const [title, setTitle] = useState('');
+
   useEffect(() => {
-    navigation.setOptions({ title: '문제집 수정' });
+    navigation.setOptions({
+      headerRight: () => (
+        <View style={styles.row}>
+          <IconButton
+            name="delete"
+            color={colorPalette.danger}
+            onPress={() => navigation.goBack()}
+          />
+          <IconButton
+            name="check"
+            color={colorPalette.success}
+            hasMarginLeft
+            onPress={() => navigation.goBack()}
+          />
+        </View>
+      ),
+    });
   }, [navigation]);
+
+  useEffect(() => {
+    if (workbook) {
+      setTitle(workbook.title);
+    }
+  }, [workbook]);
 
   return (
     <>
       <View style={styles.block}>
-        {item ? (
-          <LabelWithInput label="문제집 이름" placeholder={item.title} />
-        ) : (
+        {workbook ? (
           <LabelWithInput
             label="문제집 이름"
             placeholder="문제집 이름을 입력해주세요"
             value={title}
             onChangeText={setTitle}
           />
+        ) : (
+          <LabelWithInput
+            label="문제집 이름"
+            placeholder="문제집 이름을 입력해주세요"
+          />
         )}
         <Text style={styles.quizListLabel}>퀴즈 목록</Text>
-        {item?.cards.length ? (
+        {workbook?.cards.length ? (
           <FlatList
             showsVerticalScrollIndicator={false}
-            data={item!.cards}
-            renderItem={() => <QuizItem />}
+            data={workbook!.cards}
+            renderItem={({ item: quiz, index }) => (
+              <QuizItem quiz={quiz} inx={index} workbookId={workbook.id} />
+            )}
             ItemSeparatorComponent={() => <View style={styles.separator} />}
             ListFooterComponent={() => <View style={styles.separator} />}
           />
@@ -56,7 +80,12 @@ function WorkbookWriteEditor({
       </View>
       <FloatingButton
         title="문제 추가"
-        onPress={() => navigation.navigate('QuizWrite')}
+        onPress={() =>
+          navigation.navigate('QuizWrite', {
+            quiz: null,
+            workbookId: workbook.id,
+          })
+        }
       />
     </>
   );
@@ -67,6 +96,9 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingHorizontal: 16,
     backgroundColor: colorPalette.gray0,
+  },
+  row: {
+    flexDirection: 'row',
   },
   quizListLabel: {
     fontSize: 14,

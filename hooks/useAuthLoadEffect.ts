@@ -12,5 +12,5 @@ export default function useAuthLoadEffect() {
       applyToken(auth.accessToken);
       authorize(auth);
     })();
-  }, []);
+  }, [authorize]);
 }
