@@ -1,5 +1,4 @@
-import { useNavigation } from '@react-navigation/native';
-import React, { ClassAttributes, LegacyRef, useRef, useState } from 'react';
+import React, { useState } from 'react';
 import { FlatList, Image, StyleSheet, Text, View } from 'react-native';
 import { useQuery } from 'react-query';
 import { getMyWorkbooks } from '../api/workbooks';
@@ -9,31 +8,37 @@ import LabelWithInput from '../components/common/LabelWithInput';
 import WorkbookItem from '../components/WorkbookItem';
 import useCreateWorkbook from '../hooks/useCreateWorkbook';
 import colorPalette from '../theme/colorPalette';
-import { Workbook } from '../types';
-import { RootStackNavigationProp } from './RootStack';
 
 function MyWorkbook() {
-  const navigation = useNavigation<RootStackNavigationProp>();
   const [toggle, setToggle] = useState(false);
   const [title, setTitle] = useState('');
-  const flatlistRef = useRef<LegacyRef<FlatList<Workbook>>>();
 
   const { data, isLoading } = useQuery('myWorkbook', () =>
     getMyWorkbooks({ cursor: 1 }),
   );
 
-  const { mutate: createWorkbook, isLoading: isCreating } = useCreateWorkbook();
+  const { mutate: createWorkbook, isLoading: isCreatLoading } =
+    useCreateWorkbook();
+
+  const init = () => {
+    setTitle('');
+    setToggle(false);
+  };
+
+  const onCancel = () => {
+    setToggle(false);
+    init();
+  };
 
   const onCreateWorkbook = () => {
-    if (isCreating) {
+    if (isCreatLoading) {
       return;
     }
     if (title === '') {
       return;
     }
     createWorkbook({ title });
-    setTitle('');
-    setToggle(false);
+    init();
   };
 
   if (isLoading) {
@@ -46,17 +51,13 @@ function MyWorkbook() {
           <View style={styles.createBlock}>
             <View style={styles.createContainer}>
               <LabelWithInput
-                label="문제집 이름"
+                label="내 문제집 생성"
                 placeholder="문제집 이름을 입력해주세요"
                 value={title}
                 onChangeText={setTitle}
               />
               <View style={styles.buttonWrap}>
-                <Button
-                  text="취소"
-                  color="transparent"
-                  onPress={() => setToggle(false)}
-                />
+                <Button text="취소" color="transparent" onPress={onCancel} />
                 <Button text="확인" hasMarginLeft onPress={onCreateWorkbook} />
               </View>
             </View>
@@ -64,7 +65,6 @@ function MyWorkbook() {
         )}
         {data!.items.length ? (
           <FlatList
-            ref={flatlistRef.current}
             data={data!.items}
             renderItem={({ item }) => <WorkbookItem item={item} />}
             ItemSeparatorComponent={() => <View style={styles.separator} />}

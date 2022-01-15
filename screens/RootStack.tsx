@@ -3,7 +3,7 @@ import {
   NativeStackNavigationProp,
 } from '@react-navigation/native-stack';
 import React from 'react';
-import { View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import LearnScreen from './LearnScreen';
 import MainTab from './MainTab';
 import QuizeWriteScreen from './QuizeWriteScreen';
@@ -72,7 +72,7 @@ function RootStack() {
       <Stack.Screen
         name="WorkbookWrite"
         component={WorkbookWriteScreen}
-        options={{ headerShown: false, gestureEnabled: false }}
+        options={{ headerShown: false }}
       />
       <Stack.Screen
         name="QuizWrite"
@@ -82,7 +82,7 @@ function RootStack() {
           gestureEnabled: false,
           headerLeft: () => <View />,
           headerRight: () => (
-            <View style={{ flexDirection: 'row' }}>
+            <View style={styles.row}>
               <IconButton
                 name="delete"
                 color={colorPalette.danger}
@@ -101,5 +101,11 @@ function RootStack() {
     </Stack.Navigator>
   );
 }
+
+const styles = StyleSheet.create({
+  row: {
+    flexDirection: 'row',
+  },
+});
 
 export default RootStack;
