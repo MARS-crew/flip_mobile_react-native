@@ -11,10 +11,10 @@ import {
 import colorPalette from '../theme/colorPalette';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { ScrollView } from 'react-native-gesture-handler';
-import { Card } from '../types';
+import { Quiz } from '../types';
 
 interface QuizFlipItemProps {
-  card: Card;
+  card: Quiz;
   inx: number;
 }
 

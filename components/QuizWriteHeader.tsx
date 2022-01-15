@@ -1,31 +1,42 @@
-import { useNavigation } from '@react-navigation/native';
-import React from 'react';
+import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
+import React, { useEffect } from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import { RootStackNavigationProp } from '../screens/RootStack';
+import useWorkbookActions from '../hooks/useWorkbookActions';
+import {
+  RootStackNavigationProp,
+  RootStackParamList,
+} from '../screens/RootStack';
 import colorPalette from '../theme/colorPalette';
 import IconButton from './common/IconButton';
 
-interface WorkbookWriteHeaderProps {
+type QuizWriteProps = {
   onSave: () => void;
-}
+};
 
-function WorkbookWriteHeader({ onSave }: WorkbookWriteHeaderProps) {
+export type QuizWriteParams = RouteProp<RootStackParamList, 'QuizWrite'>;
+
+function QuizWrite({ onSave }: QuizWriteProps) {
   const { top } = useSafeAreaInsets();
   const navigation = useNavigation<RootStackNavigationProp>();
+  const { params } = useRoute<QuizWriteParams>();
+  const currentQuiz = params.quiz;
+
   return (
     <>
       <View style={{ backgroundColor: '#fff', height: top }} />
       <View style={styels.headerBlock}>
         <IconButton name="arrow-back-ios" onPress={() => navigation.goBack()} />
-        <Text style={styels.title}>문제집 수정</Text>
+        <Text style={styels.title}>퀴즈 {currentQuiz ? '수정' : '추가'}</Text>
         <View style={styels.iconBlock}>
-          <Pressable
-            style={styels.buttonWrap}
-            onPress={() => navigation.goBack()}>
-            <Icon name="delete" size={24} color={colorPalette.danger} />
-          </Pressable>
+          {currentQuiz && (
+            <Pressable
+              style={styels.buttonWrap}
+              onPress={() => navigation.goBack()}>
+              <Icon name="delete" size={24} color={colorPalette.danger} />
+            </Pressable>
+          )}
           <Pressable
             style={[styels.buttonWrap, { marginLeft: 16 }]}
             onPress={onSave}>
@@ -73,4 +84,4 @@ const styels = StyleSheet.create({
   },
 });
 
-export default WorkbookWriteHeader;
+export default QuizWrite;

@@ -1,22 +1,18 @@
 import React, { useState } from 'react';
 import { FlatList, Image, StyleSheet, Text, View } from 'react-native';
-import { useQuery } from 'react-query';
-import { getMyWorkbooks } from '../api/workbooks';
 import Button from '../components/common/Button';
 import FloatingButton from '../components/common/FloatingButton';
 import LabelWithInput from '../components/common/LabelWithInput';
 import WorkbookItem from '../components/WorkbookItem';
 import useCreateWorkbook from '../hooks/useCreateWorkbook';
+import useMyWorkbook from '../hooks/useMyWorkbooks';
 import colorPalette from '../theme/colorPalette';
 
 function MyWorkbook() {
   const [toggle, setToggle] = useState(false);
   const [title, setTitle] = useState('');
 
-  const { data, isLoading } = useQuery('myWorkbook', () =>
-    getMyWorkbooks({ cursor: 1 }),
-  );
-
+  const { data, isLoading } = useMyWorkbook();
   const { mutate: createWorkbook, isLoading: isCreatLoading } =
     useCreateWorkbook();
 

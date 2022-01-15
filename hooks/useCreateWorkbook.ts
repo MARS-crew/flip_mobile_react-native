@@ -7,7 +7,7 @@ export default function useCreateWorkbook() {
   const queryClient = useQueryClient();
   const mutation = useMutation(createWorkbook, {
     onSuccess: () => {
-      queryClient.invalidateQueries('myWorkbook');
+      queryClient.invalidateQueries('myWorkbooks');
       customToast.success('문제집이 생성되었습니다 퀴즈를 추가해보세요!');
     },
     onError: (error: Error) => {
