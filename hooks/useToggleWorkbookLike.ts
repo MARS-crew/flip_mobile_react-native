@@ -10,6 +10,7 @@ export default function useToggleWorkbookLike() {
       queryClient.invalidateQueries('workbook');
       queryClient.invalidateQueries('myWorkbooks');
       queryClient.invalidateQueries('recentWorkbooks');
+      queryClient.invalidateQueries('topWorkbooks');
     },
     onError: (error: Error) => {
       customToast.error(error);

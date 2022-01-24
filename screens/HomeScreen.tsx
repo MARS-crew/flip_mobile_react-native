@@ -3,15 +3,16 @@ import { StyleSheet, View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import MyWorkbookList from '../components/MyWorkbookList';
 import RecentWorkbookList from '../components/RecentWorkbookList';
-import WorkBookList from '../components/WorkBookList';
+import TopWorkbookList from '../components/TopWorkbookList';
 import colorPalette from '../theme/colorPalette';
 
 function HomeScreen() {
   return (
     <ScrollView style={styles.block}>
       <MyWorkbookList />
-      {/* <WorkBookList title="🔥 인기 문제집" /> */}
+      <TopWorkbookList />
       <RecentWorkbookList />
+      <View style={{ height: 16 }} />
     </ScrollView>
   );
 }
@@ -20,6 +21,7 @@ const styles = StyleSheet.create({
   block: {
     flex: 1,
     backgroundColor: colorPalette.gray1,
+    paddingBottom: 16,
   },
 });
 

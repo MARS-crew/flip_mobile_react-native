@@ -52,6 +52,13 @@ export async function getRecentWorkbooks({
   return response.data;
 }
 
+export async function getTopWorkbooks({ limit = 10, cursor = 1 }) {
+  const response = await client.get<WorkbookListResult>(
+    `workbooks/top?page=${cursor}&limit=${limit}`,
+  );
+  return response.data;
+}
+
 export async function addQuiz(params: CreateQuizParams) {
   const response = await client.post(
     `workbooks/${params.workbookId}/cards`,

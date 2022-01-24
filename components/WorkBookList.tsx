@@ -1,9 +1,9 @@
-import { useNavigation } from '@react-navigation/native';
 import React from 'react';
-import { Dimensions, Pressable, StyleSheet, Text, View } from 'react-native';
+// import { useNavigation } from '@react-navigation/native';
+import { Dimensions, StyleSheet, Text, View } from 'react-native';
 import Carousel from 'react-native-snap-carousel';
-import Icon from 'react-native-vector-icons/MaterialIcons';
-import { MainTabNavigationProp } from '../screens/MainTab';
+// import Icon from 'react-native-vector-icons/MaterialIcons';
+// import { MainTabNavigationProp } from '../screens/MainTab';
 import colorPalette from '../theme/colorPalette';
 import { Workbook } from '../types';
 import WorkbookItem from './WorkbookItem';
@@ -15,23 +15,23 @@ interface WorkBookListProps {
 
 function WorkBookList({ title, list }: WorkBookListProps) {
   const screenWidth = Dimensions.get('window').width;
-  const navigation = useNavigation<MainTabNavigationProp>();
+  // const navigation = useNavigation<MainTabNavigationProp>();
   return (
     <View style={styles.block}>
       <View style={styles.listHeader}>
         <Text style={styles.titleText}>{title}</Text>
-        <Pressable
+        {/* <Pressable
           style={styles.more}
           onPress={() => navigation.navigate('MyWorkbook')}>
           <Text style={{ marginRight: 4, color: colorPalette.gray5 }}>
             전체 보기
           </Text>
           <Icon name="arrow-forward-ios" size={12} color={colorPalette.gray5} />
-        </Pressable>
+        </Pressable> */}
       </View>
       <Carousel
         activeSlideAlignment="start"
-        data={list}
+        data={[...list].filter(w => w.cards.length)}
         renderItem={item => <WorkbookItem item={item.item} />}
         sliderWidth={screenWidth}
         itemWidth={screenWidth - 40}
