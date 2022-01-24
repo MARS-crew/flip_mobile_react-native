@@ -1,10 +1,12 @@
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Dimensions, Text, View } from 'react-native';
 import Carousel from 'react-native-snap-carousel';
 import styled from 'styled-components/native';
 import Button from '../components/common/Button';
+import IconButton from '../components/common/IconButton';
 import QuizFlipItem from '../components/QuizFlipItem';
+import useToggleWorkbookLike from '../hooks/useToggleWorkbookLike';
 import colorPalette from '../theme/colorPalette';
 import { formatDate } from '../utils';
 import { RootStackNavigationProp, RootStackParamList } from './RootStack';
@@ -17,20 +19,46 @@ function LearnScreen() {
   const { params } = useRoute<LearnScreenProps>();
   const item = params.item;
 
+  const [liekd, setIsLiked] = useState(false);
+
+  const { mutate, isLoading } = useToggleWorkbookLike();
+
+  const onPressLike = () => {
+    if (isLoading) return;
+    mutate(item.id);
+    liekd ? setIsLiked(false) : setIsLiked(true);
+  };
+
+  useEffect(() => {
+    item.hasLike ? setIsLiked(true) : setIsLiked(false);
+  }, [item.hasLike, setIsLiked]);
+
   return (
     <Block>
       <LearnHeader>
         <QuizTitle>{item.title}</QuizTitle>
         <WorkbookInfoBlock>
-          <Thumbnail>
-            <Text>{item.user.email[0].toUpperCase()}</Text>
-          </Thumbnail>
-          <View>
-            <Nickname>{item.user.email}</Nickname>
-            <DateText>
-              {formatDate(item.user.createdAt)} · {item.cards.length}개 문제
-            </DateText>
+          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+            <Thumbnail>
+              <Text>{item.user.email[0].toUpperCase()}</Text>
+            </Thumbnail>
+            <View>
+              <Nickname>{item.user.email}</Nickname>
+              <DateText>
+                {formatDate(item.createdAt)} · 좋아요 {item.likeCount}개 · 퀴즈{' '}
+                {item.cards.length}개
+              </DateText>
+            </View>
           </View>
+          {liekd ? (
+            <IconButton
+              name="favorite"
+              onPress={onPressLike}
+              color={colorPalette.danger}
+            />
+          ) : (
+            <IconButton name="favorite-border" onPress={onPressLike} />
+          )}
         </WorkbookInfoBlock>
       </LearnHeader>
       <Carousel
@@ -73,7 +101,8 @@ const QuizTitle = styled.Text`
 
 const WorkbookInfoBlock = styled.View`
   flex-direction: row;
-  align-items: center;
+  align-items: flex-end;
+  justify-content: space-between;
 `;
 
 const Thumbnail = styled.View`

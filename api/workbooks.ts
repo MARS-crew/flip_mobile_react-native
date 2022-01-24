@@ -64,3 +64,8 @@ export async function modifyQuiz(params: ModifyQuizParams) {
   );
   return response.data;
 }
+
+export async function toggleWorkbookLike(id: number) {
+  const response = await client.put(`workbooks/${id}/like`);
+  return response.data;
+}

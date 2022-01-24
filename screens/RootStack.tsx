@@ -3,7 +3,6 @@ import {
   NativeStackNavigationProp,
 } from '@react-navigation/native-stack';
 import React from 'react';
-import { View } from 'react-native';
 import LearnScreen from './LearnScreen';
 import MainTab from './MainTab';
 import QuizeWriteScreen from './QuizeWriteScreen';
@@ -13,6 +12,7 @@ import WorkbookWriteScreen from './WorkbookWriteScreen';
 import useAuthLoadEffect from '../hooks/useAuthLoadEffect';
 import { Quiz, Workbook } from '../types';
 import useUser from '../hooks/useUser';
+import GoBack from '../components/common/GoBack';
 
 export type RootStackParamList = {
   Splash: undefined;
@@ -65,9 +65,8 @@ function RootStack() {
         component={LearnScreen}
         options={{
           title: '학습하기',
-          headerLeft: () => <View />,
+          headerLeft: () => <GoBack />,
           headerTitleAlign: 'center',
-          gestureEnabled: false,
         }}
       />
       <Stack.Screen

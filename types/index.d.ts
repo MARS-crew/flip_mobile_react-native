@@ -25,6 +25,8 @@ export interface WorkbookListResult {
 
 export interface Workbook extends CreateWorkbookResult {
   cards: Quiz[];
+  likeCount: number;
+  hasLike: boolean;
 }
 
 export interface Quiz {

@@ -1,10 +1,12 @@
 import { useNavigation, useRoute } from '@react-navigation/native';
 import React from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
+import useToggleWorkbookLike from '../hooks/useToggleWorkbookLike';
 import { RootStackNavigationProp } from '../screens/RootStack';
 import colorPalette from '../theme/colorPalette';
 import { Workbook } from '../types';
 import { formatDate } from '../utils';
+import IconButton from './common/IconButton';
 
 interface IWorkbookItem {
   item: Workbook;
@@ -16,11 +18,19 @@ function WorkbookItem({ item, itemWidth, gap }: IWorkbookItem) {
   const navigation = useNavigation<RootStackNavigationProp>();
   const route = useRoute();
 
+  const { mutate, isLoading } = useToggleWorkbookLike();
+
   const onPress = () => {
     route.name === 'MyWorkbook'
       ? navigation.navigate('WorkbookWrite', { id: item.id })
       : navigation.navigate('Learn', { item });
   };
+
+  const onPressLike = () => {
+    if (isLoading) return;
+    mutate(item.id);
+  };
+
   return (
     <View
       style={[
@@ -32,16 +42,30 @@ function WorkbookItem({ item, itemWidth, gap }: IWorkbookItem) {
           <Text style={styles.titleText}>{item.title}</Text>
         </View>
         <View style={styles.bodyBlock}>
-          <View style={styles.defaultThumbnail}>
-            <Text style={styles.firstText}>
-              {item.user.email[0].toUpperCase()}
-            </Text>
+          <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}>
+            <View style={styles.defaultThumbnail}>
+              <Text style={styles.firstText}>
+                {item.user.email[0].toUpperCase()}
+              </Text>
+            </View>
+            <View>
+              <Text style={styles.nickname}>{item.user.email}</Text>
+              <Text style={styles.dateText}>
+                {formatDate(item.createdAt)} · 좋아요 {item.likeCount}개 · 퀴즈{' '}
+                {item.cards.length}개
+              </Text>
+            </View>
           </View>
           <View>
-            <Text style={styles.nickname}>{item.user.email}</Text>
-            <Text style={styles.dateText}>
-              {formatDate(item.createdAt)} · {item.cards.length}개 문제
-            </Text>
+            {item.hasLike ? (
+              <IconButton
+                name="favorite"
+                onPress={onPressLike}
+                color={colorPalette.danger}
+              />
+            ) : (
+              <IconButton name="favorite-border" onPress={onPressLike} />
+            )}
           </View>
         </View>
       </Pressable>
@@ -52,7 +76,6 @@ function WorkbookItem({ item, itemWidth, gap }: IWorkbookItem) {
 const styles = StyleSheet.create({
   block: {
     padding: 16,
-    paddingRight: 8,
     backgroundColor: colorPalette.gray0,
     borderRadius: 8,
     borderWidth: 1,
@@ -105,7 +128,8 @@ const styles = StyleSheet.create({
   },
   bodyBlock: {
     flexDirection: 'row',
-    alignItems: 'center',
+    alignItems: 'flex-end',
+    justifyContent: 'space-between',
   },
   nickname: {
     fontWeight: 'bold',
