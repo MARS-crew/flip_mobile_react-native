@@ -18,6 +18,11 @@ export interface ITerm {
   value: boolean;
 }
 
+export interface GetWorkbooksParams {
+  limit?: number;
+  cursor: number;
+}
+
 export interface WorkbookListResult {
   items: Workbook[];
   meta: Meta;

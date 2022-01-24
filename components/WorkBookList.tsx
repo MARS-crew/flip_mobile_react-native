@@ -10,7 +10,7 @@ import WorkbookItem from './WorkbookItem';
 
 interface WorkBookListProps {
   title: string;
-  list?: Workbook[];
+  list: Workbook[];
 }
 
 function WorkBookList({ title, list }: WorkBookListProps) {
@@ -29,18 +29,16 @@ function WorkBookList({ title, list }: WorkBookListProps) {
           <Icon name="arrow-forward-ios" size={12} color={colorPalette.gray5} />
         </Pressable>
       </View>
-      {list && (
-        <Carousel
-          activeSlideAlignment="start"
-          data={list}
-          renderItem={item => <WorkbookItem item={item.item} />}
-          sliderWidth={screenWidth}
-          itemWidth={screenWidth - 40}
-          inactiveSlideOpacity={1}
-          inactiveSlideScale={1}
-          slideStyle={{ marginLeft: 10 }}
-        />
-      )}
+      <Carousel
+        activeSlideAlignment="start"
+        data={list}
+        renderItem={item => <WorkbookItem item={item.item} />}
+        sliderWidth={screenWidth}
+        itemWidth={screenWidth - 40}
+        inactiveSlideOpacity={1}
+        inactiveSlideScale={1}
+        slideStyle={{ marginLeft: 10 }}
+      />
     </View>
   );
 }

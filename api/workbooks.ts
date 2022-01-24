@@ -5,16 +5,14 @@ import {
   ModifyQuizParams,
   Workbook,
   ModifyWorkbookParams,
+  GetWorkbooksParams,
 } from '../types';
 import client from './client';
 
 export async function getMyWorkbooks({
   limit = 10,
   cursor,
-}: {
-  limit?: number;
-  cursor: number;
-}) {
+}: GetWorkbooksParams) {
   const response = await client.get<WorkbookListResult>(
     `workbooks/me?page=${cursor}&limit=${limit}`,
   );
@@ -40,6 +38,16 @@ export async function modifyWorkbook(params: ModifyWorkbookParams) {
   const response = await client.patch(
     `workbooks/${params.workbookId}`,
     params.title,
+  );
+  return response.data;
+}
+
+export async function getRecentWorkbooks({
+  limit = 10,
+  cursor = 1,
+}: GetWorkbooksParams) {
+  const response = await client.get<WorkbookListResult>(
+    `workbooks?page=${cursor}&limit=${limit}`,
   );
   return response.data;
 }

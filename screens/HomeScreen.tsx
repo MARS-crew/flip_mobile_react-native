@@ -1,16 +1,18 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
+import { ScrollView } from 'react-native-gesture-handler';
 import MyWorkbookList from '../components/MyWorkbookList';
+import RecentWorkbookList from '../components/RecentWorkbookList';
 import WorkBookList from '../components/WorkBookList';
 import colorPalette from '../theme/colorPalette';
 
 function HomeScreen() {
   return (
-    <View style={styles.block}>
+    <ScrollView style={styles.block}>
       <MyWorkbookList />
-      <WorkBookList title="🔥 인기 문제집" />
-      <WorkBookList title="🌱 최신 문제집" />
-    </View>
+      {/* <WorkBookList title="🔥 인기 문제집" /> */}
+      <RecentWorkbookList />
+    </ScrollView>
   );
 }
 

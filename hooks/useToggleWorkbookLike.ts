@@ -7,8 +7,9 @@ export default function useToggleWorkbookLike() {
   const queryClient = useQueryClient();
   const mutation = useMutation(toggleWorkbookLike, {
     onSuccess: () => {
-      queryClient.invalidateQueries('myWorkbooks');
       queryClient.invalidateQueries('workbook');
+      queryClient.invalidateQueries('myWorkbooks');
+      queryClient.invalidateQueries('recentWorkbooks');
     },
     onError: (error: Error) => {
       customToast.error(error);
