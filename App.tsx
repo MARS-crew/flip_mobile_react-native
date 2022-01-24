@@ -4,8 +4,8 @@ import { Platform, StatusBar, UIManager } from 'react-native';
 import RootStack from './screens/RootStack';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import Toast from 'react-native-toast-message';
-import toastConfig from './utils/\btoastConfig';
 import { RecoilRoot } from 'recoil';
+import toastConfig from './utils/toastConfig';
 
 if (Platform.OS === 'android') {
   if (UIManager.setLayoutAnimationEnabledExperimental) {

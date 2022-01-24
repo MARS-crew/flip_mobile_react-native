@@ -8,5 +8,6 @@ module.exports = {
     '@typescript-eslint/no-shadow': ['error'],
     '@typescript-eslint/no-unused-vars': 1,
     curly: 'off',
+    'react-native/no-inline-styles': 0,
   },
 };
