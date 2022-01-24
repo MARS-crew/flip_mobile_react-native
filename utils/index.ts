@@ -18,11 +18,7 @@ export function formatDate(date: string) {
   const d = new Date(date);
   const now = new Date();
   now.setHours(now.getHours() + 9);
-  console.log('--------------------');
-  console.log(now, d);
-  console.log(now.getTime(), d.getTime());
   const diff = (now.getTime() - d.getTime()) / 1000;
-  console.log(diff);
 
   if (diff < 60 * 1) {
     return '방금 전';
