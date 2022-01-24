@@ -5,7 +5,7 @@ import { applyToken, clearToken } from '../api/client';
 import { RootStackNavigationProp } from '../screens/RootStack';
 import authStorage from '../storages/authStorage';
 import { Error } from '../types';
-import { customToast } from '../utils/\btoastConfig';
+import { customToast } from '../utils/toastConfig';
 
 export default function useSignUp() {
   const navigation = useNavigation<RootStackNavigationProp>();

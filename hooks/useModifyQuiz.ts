@@ -2,7 +2,7 @@ import { useNavigation } from '@react-navigation/native';
 import { useMutation, useQueryClient } from 'react-query';
 import { modifyQuiz } from '../api/workbooks';
 import { Error } from '../types';
-import { customToast } from '../utils/\btoastConfig';
+import { customToast } from '../utils/toastConfig';
 
 export default function useModifyQuiz() {
   const navigation = useNavigation();

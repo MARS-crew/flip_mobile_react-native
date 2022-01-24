@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from 'react-query';
 import { createWorkbook } from '../api/workbooks';
 import { Error } from '../types';
-import { customToast } from '../utils/\btoastConfig';
+import { customToast } from '../utils/toastConfig';
 
 export default function useCreateWorkbook() {
   const queryClient = useQueryClient();
