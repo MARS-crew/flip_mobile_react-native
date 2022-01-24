@@ -31,22 +31,6 @@ export async function getWorkbook(id: number) {
   return response.data;
 }
 
-export async function addQuiz(params: CreateQuizParams) {
-  const response = await client.post(
-    `workbooks/${params.workbookId}/cards`,
-    params.quiz,
-  );
-  return response.data;
-}
-
-export async function modifyQuiz(params: ModifyQuizParams) {
-  const response = await client.patch(
-    `workbooks/cards/${params.cardId}`,
-    params.quiz,
-  );
-  return response.data;
-}
-
 export async function deleteWorkbook(id: number) {
   const response = await client.delete(`workbooks/${id}`);
   return response.data;
@@ -56,6 +40,27 @@ export async function modifyWorkbook(params: ModifyWorkbookParams) {
   const response = await client.patch(
     `workbooks/${params.workbookId}`,
     params.title,
+  );
+  return response.data;
+}
+
+export async function addQuiz(params: CreateQuizParams) {
+  const response = await client.post(
+    `workbooks/${params.workbookId}/cards`,
+    params.quiz,
+  );
+  return response.data;
+}
+
+export async function deleteQuiz(id: number) {
+  const response = await client.delete(`workbooks/cards/${id}`);
+  return response.data;
+}
+
+export async function modifyQuiz(params: ModifyQuizParams) {
+  const response = await client.patch(
+    `workbooks/cards/${params.cardId}`,
+    params.quiz,
   );
   return response.data;
 }

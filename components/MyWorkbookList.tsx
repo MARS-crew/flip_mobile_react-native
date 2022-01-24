@@ -8,7 +8,12 @@ function MyWorkbookList() {
 
   if (isLoading) return <Text>loading...</Text>;
   return (
-    <WorkBookList title="👋 나의 문제집" list={[...data!.items].splice(0, 3)} />
+    <WorkBookList
+      title="👋 나의 문제집"
+      list={[...data!.items]
+        .filter(workbook => workbook.cards.length)
+        .splice(0, 3)}
+    />
   );
 }
 

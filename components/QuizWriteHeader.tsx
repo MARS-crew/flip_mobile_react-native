@@ -1,9 +1,8 @@
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import useWorkbookActions from '../hooks/useWorkbookActions';
 import {
   RootStackNavigationProp,
   RootStackParamList,
@@ -13,11 +12,12 @@ import IconButton from './common/IconButton';
 
 type QuizWriteProps = {
   onSave: () => void;
+  onDelete: () => void;
 };
 
 export type QuizWriteParams = RouteProp<RootStackParamList, 'QuizWrite'>;
 
-function QuizWrite({ onSave }: QuizWriteProps) {
+function QuizWrite({ onSave, onDelete }: QuizWriteProps) {
   const { top } = useSafeAreaInsets();
   const navigation = useNavigation<RootStackNavigationProp>();
   const { params } = useRoute<QuizWriteParams>();
@@ -31,9 +31,7 @@ function QuizWrite({ onSave }: QuizWriteProps) {
         <Text style={styels.title}>퀴즈 {currentQuiz ? '수정' : '추가'}</Text>
         <View style={styels.iconBlock}>
           {currentQuiz && (
-            <Pressable
-              style={styels.buttonWrap}
-              onPress={() => navigation.goBack()}>
+            <Pressable style={styels.buttonWrap} onPress={onDelete}>
               <Icon name="delete" size={24} color={colorPalette.danger} />
             </Pressable>
           )}

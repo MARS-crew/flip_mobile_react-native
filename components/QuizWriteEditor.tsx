@@ -1,13 +1,8 @@
-import { useRoute } from '@react-navigation/native';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { KeyboardAvoidingView, StyleSheet } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
-import { useRecoilValue } from 'recoil';
-import { workbookState } from '../atoms/workbook';
 import LabelWithInput from '../components/common/LabelWithInput';
-import useWorkbookActions from '../hooks/useWorkbookActions';
 import colorPalette from '../theme/colorPalette';
-import { QuizWriteParams } from './QuizWriteHeader';
 
 interface QuizWriteEditorProps {
   question: string;
