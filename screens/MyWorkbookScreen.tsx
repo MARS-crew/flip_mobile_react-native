@@ -8,7 +8,7 @@ import useCreateWorkbook from '../hooks/useCreateWorkbook';
 import useMyWorkbook from '../hooks/useMyWorkbooks';
 import colorPalette from '../theme/colorPalette';
 
-function MyWorkbook() {
+function MyWorkbookScreen() {
   const [toggle, setToggle] = useState(false);
   const [title, setTitle] = useState('');
 
@@ -125,4 +125,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default MyWorkbook;
+export default MyWorkbookScreen;

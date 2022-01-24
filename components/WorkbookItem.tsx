@@ -1,4 +1,4 @@
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 import React from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { RootStackNavigationProp } from '../screens/RootStack';
@@ -13,8 +13,12 @@ interface IWorkbookItem {
 
 function WorkbookItem({ item, itemWidth, gap }: IWorkbookItem) {
   const navigation = useNavigation<RootStackNavigationProp>();
+  const route = useRoute();
+
   const onPress = () => {
-    navigation.navigate('WorkbookWrite', { id: item.id });
+    route.name === 'MyWorkbook'
+      ? navigation.navigate('WorkbookWrite', { id: item.id })
+      : navigation.navigate('Learn', { item });
   };
   return (
     <View

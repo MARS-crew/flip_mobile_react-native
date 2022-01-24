@@ -4,6 +4,7 @@ import {
   CreateQuizParams,
   ModifyQuizParams,
   Workbook,
+  ModifyWorkbookParams,
 } from '../types';
 import client from './client';
 
@@ -42,6 +43,19 @@ export async function modifyQuiz(params: ModifyQuizParams) {
   const response = await client.patch(
     `workbooks/cards/${params.cardId}`,
     params.quiz,
+  );
+  return response.data;
+}
+
+export async function deleteWorkbook(id: number) {
+  const response = await client.delete(`workbooks/${id}`);
+  return response.data;
+}
+
+export async function modifyWorkbook(params: ModifyWorkbookParams) {
+  const response = await client.patch(
+    `workbooks/${params.workbookId}`,
+    params.title,
   );
   return response.data;
 }

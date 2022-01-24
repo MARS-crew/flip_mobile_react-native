@@ -3,17 +3,35 @@ import React from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import { useMutation, useQueryClient } from 'react-query';
+import { deleteWorkbook } from '../api/workbooks';
 import { RootStackNavigationProp } from '../screens/RootStack';
 import colorPalette from '../theme/colorPalette';
+import { Error, Workbook } from '../types';
+import { customToast } from '../utils/toastConfig';
 import IconButton from './common/IconButton';
 
 interface WorkbookWriteHeaderProps {
-  onSave: () => void;
+  workbook: Workbook;
+  onModify: () => void;
 }
 
-function WorkbookWriteHeader({ onSave }: WorkbookWriteHeaderProps) {
-  const { top } = useSafeAreaInsets();
+function WorkbookWriteHeader({ workbook, onModify }: WorkbookWriteHeaderProps) {
   const navigation = useNavigation<RootStackNavigationProp>();
+  const { top } = useSafeAreaInsets();
+  const queryClient = useQueryClient();
+  const { mutate } = useMutation(deleteWorkbook, {
+    onSuccess: () => {
+      queryClient.invalidateQueries('myWorkbooks');
+      customToast.success('문제집을 삭제하였습니다.');
+      navigation.goBack();
+    },
+    onError: (error: Error) => {
+      customToast.error(error);
+      navigation.goBack();
+    },
+  });
+
   return (
     <>
       <View style={{ backgroundColor: '#fff', height: top }} />
@@ -23,12 +41,12 @@ function WorkbookWriteHeader({ onSave }: WorkbookWriteHeaderProps) {
         <View style={styels.iconBlock}>
           <Pressable
             style={styels.buttonWrap}
-            onPress={() => navigation.goBack()}>
+            onPress={() => mutate(workbook.id)}>
             <Icon name="delete" size={24} color={colorPalette.danger} />
           </Pressable>
           <Pressable
             style={[styels.buttonWrap, { marginLeft: 16 }]}
-            onPress={onSave}>
+            onPress={onModify}>
             <Icon name="check" size={24} color={colorPalette.success} />
           </Pressable>
         </View>

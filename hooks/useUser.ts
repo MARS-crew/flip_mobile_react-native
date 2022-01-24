@@ -1,7 +1,11 @@
-import { useRecoilValue } from 'recoil';
-import { authState } from '../atoms/auth';
+import { useQuery } from 'react-query';
+import getMyProfile from '../api/users';
 
 export default function useUser() {
-  const auth = useRecoilValue(authState);
-  return auth.user;
+  const { data, isLoading, isError } = useQuery('myProfile', getMyProfile);
+  return {
+    data,
+    isLoading,
+    isError,
+  };
 }

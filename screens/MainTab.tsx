@@ -4,11 +4,10 @@ import {
   createBottomTabNavigator,
 } from '@react-navigation/bottom-tabs';
 import HomeScreen from './HomeScreen';
-import MyScreen from './MyScreen';
 import SettingsScreen from './SettingsScreen';
 import colorPalette from '../theme/colorPalette';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import MyWorkbook from './MyWorkbook';
+import MyWorkbook from './MyWorkbookScreen';
 
 type MainTabParamList = {
   Home: undefined;

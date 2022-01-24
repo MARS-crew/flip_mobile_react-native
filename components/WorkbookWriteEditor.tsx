@@ -1,5 +1,5 @@
 import { useNavigation } from '@react-navigation/native';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { Image, StyleSheet, Text, View } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
 import { RootStackNavigationProp } from '../screens/RootStack';
@@ -12,11 +12,16 @@ import QuizItem from './QuizItem';
 
 interface WorkbookWriteEditorProps {
   workbook: Workbook;
+  title: string;
+  setTitle: React.Dispatch<React.SetStateAction<string>>;
 }
 
-function WorkbookWriteEditor({ workbook }: WorkbookWriteEditorProps) {
+function WorkbookWriteEditor({
+  workbook,
+  title,
+  setTitle,
+}: WorkbookWriteEditorProps) {
   const navigation = useNavigation<RootStackNavigationProp>();
-  const [title, setTitle] = useState('');
 
   useEffect(() => {
     navigation.setOptions({
@@ -37,12 +42,6 @@ function WorkbookWriteEditor({ workbook }: WorkbookWriteEditorProps) {
       ),
     });
   }, [navigation]);
-
-  useEffect(() => {
-    if (workbook) {
-      setTitle(workbook.title);
-    }
-  }, [workbook]);
 
   return (
     <>

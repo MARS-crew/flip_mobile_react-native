@@ -11,10 +11,11 @@ import SignInScreen from './SignInScreen';
 import SignUpScreen from './SignUpScreen';
 import WorkbookWriteScreen from './WorkbookWriteScreen';
 import useAuthLoadEffect from '../hooks/useAuthLoadEffect';
-import useUser from '../hooks/useUser';
 import { Quiz, Workbook } from '../types';
+import useUser from '../hooks/useUser';
 
 export type RootStackParamList = {
+  Splash: undefined;
   MainTab: undefined;
   SignUp: undefined;
   SignIn: undefined;
@@ -36,7 +37,7 @@ export type RootStackNavigationProp =
 export const Stack = createNativeStackNavigator<RootStackParamList>();
 
 function RootStack() {
-  const user = useUser();
+  const { data: user } = useUser();
   useAuthLoadEffect();
   return (
     <Stack.Navigator>
@@ -45,12 +46,12 @@ function RootStack() {
           <Stack.Screen
             name="SignIn"
             component={SignInScreen}
-            options={{ headerShown: false, gestureEnabled: false }}
+            options={{ headerShown: false }}
           />
           <Stack.Screen
             name="SignUp"
             component={SignUpScreen}
-            options={{ headerShown: false, gestureEnabled: false }}
+            options={{ headerShown: false }}
           />
         </>
       )}

@@ -1,4 +1,3 @@
-import { useMemo } from 'react';
 import { useRecoilState } from 'recoil';
 import { authState } from '../atoms/auth';
 import { SignInResult, SignUpResult } from '../types';
@@ -6,11 +5,11 @@ import { SignInResult, SignUpResult } from '../types';
 export default function useAuthActions() {
   const [, set] = useRecoilState(authState);
   return {
-    authorize: (user: SignUpResult | SignInResult) => {
-      set({ user });
+    authorize: (auth: SignUpResult | SignInResult) => {
+      set(auth);
     },
     logout: () => {
-      set({ user: null });
+      set(null);
     },
   };
 }

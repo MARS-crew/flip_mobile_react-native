@@ -78,3 +78,8 @@ export interface ModifyQuizParams {
   cardId: number;
   quiz: QuizParams;
 }
+
+export interface ModifyWorkbookParams {
+  workbookId: number;
+  title: { title: string };
+}

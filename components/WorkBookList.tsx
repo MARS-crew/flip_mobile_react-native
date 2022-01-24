@@ -5,15 +5,15 @@ import Carousel from 'react-native-snap-carousel';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { MainTabNavigationProp } from '../screens/MainTab';
 import colorPalette from '../theme/colorPalette';
+import { Workbook } from '../types';
 import WorkbookItem from './WorkbookItem';
 
 interface WorkBookListProps {
   title: string;
+  list?: Workbook[];
 }
 
-const list = [1, 2, 3];
-
-function WorkBookList({ title }: WorkBookListProps) {
+function WorkBookList({ title, list }: WorkBookListProps) {
   const screenWidth = Dimensions.get('window').width;
   const navigation = useNavigation<MainTabNavigationProp>();
   return (
@@ -29,16 +29,18 @@ function WorkBookList({ title }: WorkBookListProps) {
           <Icon name="arrow-forward-ios" size={12} color={colorPalette.gray5} />
         </Pressable>
       </View>
-      {/* <Carousel
-        activeSlideAlignment="start"
-        data={list}
-        renderItem={() => <WorkbookItem />}
-        sliderWidth={screenWidth}
-        itemWidth={screenWidth - 40}
-        inactiveSlideOpacity={1}
-        inactiveSlideScale={1}
-        slideStyle={{ marginLeft: 10 }}
-      /> */}
+      {list && (
+        <Carousel
+          activeSlideAlignment="start"
+          data={list}
+          renderItem={item => <WorkbookItem item={item.item} />}
+          sliderWidth={screenWidth}
+          itemWidth={screenWidth - 40}
+          inactiveSlideOpacity={1}
+          inactiveSlideScale={1}
+          slideStyle={{ marginLeft: 10 }}
+        />
+      )}
     </View>
   );
 }
