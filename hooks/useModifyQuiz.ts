@@ -9,6 +9,7 @@ export default function useModifyQuiz() {
   const queryClient = useQueryClient();
   const mutation = useMutation(modifyQuiz, {
     onSuccess: () => {
+      queryClient.invalidateQueries('myWorkbooks');
       queryClient.invalidateQueries('workbook');
       customToast.success('퀴즈 수정완료!');
       navigation.goBack();

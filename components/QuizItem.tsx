@@ -3,7 +3,7 @@ import React from 'react';
 import { Pressable, StyleSheet, Text } from 'react-native';
 import { RootStackNavigationProp } from '../screens/RootStack';
 import colorPalette from '../theme/colorPalette';
-import { Quiz, Workbook } from '../types';
+import { Quiz } from '../types';
 
 interface QuizItemProps {
   quiz: Quiz;
@@ -13,6 +13,13 @@ interface QuizItemProps {
 
 function QuizItem({ quiz, inx, workbookId }: QuizItemProps) {
   const navigation = useNavigation<RootStackNavigationProp>();
+  const turncate = (text: string) => {
+    const replaced = text.replace(/\n/g, ' ');
+    if (replaced.length <= 80) {
+      return replaced;
+    }
+    return replaced.slice(0, 80).concat('...');
+  };
   return (
     <Pressable
       style={styles.block}
@@ -20,7 +27,7 @@ function QuizItem({ quiz, inx, workbookId }: QuizItemProps) {
       <Text style={styles.quizeText}>
         {inx + 1}. {quiz.question}
       </Text>
-      <Text style={styles.answerText}>{quiz.result}</Text>
+      <Text style={styles.answerText}>{turncate(quiz.result)}</Text>
     </Pressable>
   );
 }

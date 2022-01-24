@@ -4,6 +4,7 @@ import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { RootStackNavigationProp } from '../screens/RootStack';
 import colorPalette from '../theme/colorPalette';
 import { Workbook } from '../types';
+import { formatDate } from '../utils';
 
 interface IWorkbookItem {
   item: Workbook;
@@ -39,7 +40,7 @@ function WorkbookItem({ item, itemWidth, gap }: IWorkbookItem) {
           <View>
             <Text style={styles.nickname}>{item.user.email}</Text>
             <Text style={styles.dateText}>
-              {item.createdAt} · {item.cards.length}개 문제
+              {formatDate(item.createdAt)} · {item.cards.length}개 문제
             </Text>
           </View>
         </View>

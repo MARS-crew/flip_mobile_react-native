@@ -6,6 +6,7 @@ import styled from 'styled-components/native';
 import Button from '../components/common/Button';
 import QuizFlipItem from '../components/QuizFlipItem';
 import colorPalette from '../theme/colorPalette';
+import { formatDate } from '../utils';
 import { RootStackNavigationProp, RootStackParamList } from './RootStack';
 
 type LearnScreenProps = RouteProp<RootStackParamList, 'Learn'>;
@@ -27,7 +28,7 @@ function LearnScreen() {
           <View>
             <Nickname>{item.user.email}</Nickname>
             <DateText>
-              {item.user.email} · {item.cards.length}개 문제
+              {formatDate(item.user.createdAt)} · {item.cards.length}개 문제
             </DateText>
           </View>
         </WorkbookInfoBlock>
