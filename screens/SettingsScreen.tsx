@@ -1,6 +1,6 @@
-import { useNavigation } from '@react-navigation/native';
+import { StackActions, useNavigation } from '@react-navigation/native';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { clearToken } from '../api/client';
 import Button from '../components/common/Button';
 import useAuthActions from '../hooks/useAuthActions';
@@ -19,7 +19,7 @@ function SettingsScreen() {
           logout();
           clearToken();
           authStorage.clear();
-          navigation.reset({ routes: [{ name: 'SignIn' }] });
+          navigation.dispatch(StackActions.popToTop());
         }}
       />
     </View>

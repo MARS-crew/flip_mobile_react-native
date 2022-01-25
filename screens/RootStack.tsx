@@ -58,7 +58,7 @@ function RootStack() {
       <Stack.Screen
         name="MainTab"
         component={MainTab}
-        options={{ headerShown: false }}
+        options={{ headerShown: false, gestureEnabled: false }}
       />
       <Stack.Screen
         name="Learn"

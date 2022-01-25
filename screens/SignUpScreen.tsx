@@ -1,5 +1,5 @@
 import { useNavigation } from '@react-navigation/native';
-import React, { ChangeEvent, useState } from 'react';
+import React, { useState } from 'react';
 import {
   Image,
   Keyboard,
@@ -71,22 +71,27 @@ function SignUpScreen() {
       : setPasswordCheckTerm({ ...passwordCheckTerm, value: true });
   };
 
-  const onPress = () => {
-    if (isLoading) return;
-
-    if (email == '' || password == '' || passwordCheck == '') return;
-    if (emailTerm.value || passwordTerm.value || passwordCheckTerm.value)
-      return;
-
-    signUp({ email, password });
-  };
-
-  const goToSignInScreen = () => {
-    navigation.navigate('SignIn');
+  const init = () => {
     setEmail('');
     setPassword('');
     setPasswordCheck('');
     Keyboard.dismiss();
+  };
+
+  const onPress = () => {
+    if (isLoading) return;
+
+    if (email === '' || password === '' || passwordCheck === '') return;
+    if (emailTerm.value || passwordTerm.value || passwordCheckTerm.value)
+      return;
+
+    signUp({ email, password });
+    init();
+  };
+
+  const goToSignInScreen = () => {
+    navigation.navigate('SignIn');
+    init();
   };
   return (
     <SafeAreaView style={styles.block}>

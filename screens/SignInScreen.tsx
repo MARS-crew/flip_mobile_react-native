@@ -23,19 +23,24 @@ function SignInScreen() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
+  const init = () => {
+    setEmail('');
+    setPassword('');
+    Keyboard.dismiss();
+  };
+
   const onPress = () => {
     if (isLoading) return;
 
-    if (email == '' || password == '') return;
+    if (email === '' || password === '') return;
 
     signIn({ email, password });
+    init();
   };
 
   const goToSignUpScreen = () => {
     navigation.navigate('SignUp');
-    setEmail('');
-    setPassword('');
-    Keyboard.dismiss();
+    init();
   };
 
   return (
