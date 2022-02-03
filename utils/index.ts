@@ -8,7 +8,7 @@ export function getErrorMessage(error: Error): string {
   return message ?? '서버와의 통신이 원활하지 않습니다';
 }
 
-export function formatDate(date: string) {
+export function formatDate(date: Date) {
   const d = new Date(date);
   const now = new Date();
   now.setHours(now.getHours() + 9);
@@ -17,8 +17,10 @@ export function formatDate(date: string) {
   if (diff < 60 * 1) {
     return '방금 전';
   }
+
+  d.setHours(d.getHours() - 9);
   if (diff < 60 * 60 * 24 * 3) {
-    return formatDistanceToNow(d.setHours(d.getHours() - 9), {
+    return formatDistanceToNow(d, {
       addSuffix: true,
       locale: ko,
     });
