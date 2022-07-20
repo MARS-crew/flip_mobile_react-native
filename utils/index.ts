@@ -27,3 +27,11 @@ export function formatDate(date: Date) {
   }
   return format(d, 'PPP', { locale: ko });
 }
+
+export const turncate = (text: string) => {
+  const replaced = text.replace(/\n/g, ' ');
+  if (replaced.length <= 80) {
+    return replaced;
+  }
+  return replaced.slice(0, 80).concat('...');
+};
